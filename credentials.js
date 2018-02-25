@@ -3,8 +3,8 @@ module.exports = {
 		
 		host: 'localhost',
 		user: 'postgres', 
-		password: 'Terramar',
-		database: 'treasurehunters'
+		password: '',
+		database: ''
 
 	}
 };

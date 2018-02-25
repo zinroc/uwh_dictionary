@@ -1,6 +1,8 @@
 "use strict";
 
-module.exports = function (knex) {
+var knex;
+module.exports = function (k) {
+    knex = k;
     return {
         createUsersTable, 
         createProjectsTable,
