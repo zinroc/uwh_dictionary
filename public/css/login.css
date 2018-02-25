@@ -1,0 +1,32 @@
+#login {
+    background-color: #17a512;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    color: white;
+}
+
+.login-inputs-container {
+    text-align: center;
+    position: relative;
+}
+
+.login-inputs-container input {
+    padding: 5px;
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+    margin: 5px;
+    color: black;
+}
+
+.button-container {
+    text-align: center;
+}
+
+.button-container .btn {
+    width: 100%;
+    display: inline-block;
+    margin: 5px;
+}
