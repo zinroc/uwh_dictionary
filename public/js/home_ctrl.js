@@ -11,8 +11,29 @@ var getCookie = function (key) {
         return o[key];
     }
 
+var Phase_Options = [
+    {name: "Wall_Corner", x: 25, y: 25, width:5, height: 5},
+    {name: "Puck_Collection", x: 0, y: 0, width: 5, height: 5},
+    {name: "Puck_Distribution", x: 0, y: 0, width: 5, height: 5},
+    {name: "Formation_Displacement", x: 0, y: 0, width: 5, height: 5}
+];
+
 app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
     "use strict";
 
-    $scope.hello = "world";
+    $scope.selectedPhase = "Puck_Collection";
+
+    $scope.populatePhaseButtons = function () {
+        Phase_Options.forEach(function(phase) {
+            console.log(phase);
+            $($scope.UIButton(phase.name, phase.x, phase.y, phase.width, phase.height)).appendTo("#top-panel");
+        });
+    }
+
+
+    $scope.UIButton = function (name, left, top, width, height) {
+        return '<div id="'+ name +'" class="phase-button" style="position: absolute; left: '+ left +'%; top: '+ top +'%; width: '+ width +'%; height: '+ height +'%"></div>';
+    }
+
+    $scope.populatePhaseButtons();
 });
