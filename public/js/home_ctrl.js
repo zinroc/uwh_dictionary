@@ -14,8 +14,8 @@ var getCookie = function (key) {
 var Phase_Options = [
     {name: "Wall_Corner", x: 20.7, y: 24, width:12.2, height: 9, el: null},
     {name: "Puck_Collection", x: 75, y: 47.2, width: 12, height: 12, el: null},
-    {name: "Puck_Distribution", x: 64.2, y: 79.5, width: 11.2, height: 10.7, el: null},
-    {name: "Formation_Displacement", x: 86, y: 79.5, width: 11.2, height: 11, el: null}
+    {name: "Puck_Distribution", x: 64.2, y: 79.5, width: 11.7, height: 11.6, el: null},
+    {name: "Formation_Displacement", x: 86, y: 79.5, width: 11.7, height: 11.6, el: null}
 ];
 
 app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
@@ -28,7 +28,13 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
             console.log(phase);
             var el = $($scope.UIButton(phase.name, phase.x, phase.y, phase.width, phase.height)).appendTo("#top-panel");
 
-            $(el).click(function() {$scope.selectPhase(phase.name)});
+            $(el).click(function() {
+                $scope.selectPhase(phase.name);
+                $("html, body").animate({
+                    scrollTop: $("#phase-panel").offset().top
+                }, 500);
+            });
+
         });
     }
 
@@ -40,7 +46,8 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
     }
 
     $scope.selectPhase = function(phase) {
-        console.log(phase);
+        $scope.selectedPhase = phase;
+        $scope.$apply();
     }
 
     $scope.populatePhaseButtons();
