@@ -6,61 +6,16 @@ var express = require("express"),
     randtoken = require('rand-token'),
     error = require("./error.js"),
     validator = require('express-validator'),
-    validate = require("./validate.js");
-
-
-
-
-const session = require('express-session');
-//const KnexSessionStore = require('connect-session-knex')(session);
-
-//const knex = require("knex")({
-//    client: "pg",
-//    connection: credentials.PG_CON_STRING
-//});
-
-//const store = new KnexSessionStore({
-//    knex: knex,
-//    tablename: 'sessions'
-//});
+    validate = require("./validate.js"),
+    phase = require("./phase.js");
 
 const app = express();
-
-//app.use(session({
-//    secret: 'beep borp', 
-//   resave: false,
-//    saveUninitialized: false,
-//    cookie: {
-//        maxAge: 300000 // 5 min
-//    },
-//    store: store
-//}));
-
-//app.use((req, res, next) => {
-//  let views = req.session.views;
-
-//  if (!views) {
-//    views = req.session.views = {};
-//  }
-  // get the url pathname
-//  const pathname = parseurl(req).pathname;
-
-  // count the views
-//  views[pathname] = (views[pathname] || 0) + 1;
-
-//  next();
-//});
 
 app.use(bodyParser.json());
 app.use(validator());
 app.set("port", process.env.PORT || 8081);
 
 app.use(express.static("public"));
-
-
-//database_setup.createTables().then(() => {
-//    console.log("tables created");
-//});
 
 /********************** Views *************************************/
 
@@ -74,8 +29,66 @@ app.route("/").get(showHomeScreen);
 
 /********************** Views *************************************/
 
+app.route("/api/phases").get(
+    (req, res) => {
+        validate.request(req, {})
+        .then((invalidParams) => {
+            if (invalidParams.isEmpty()) {
+                phase.get(res);
+            } else {
+                error.respondWithArr(
+                    error.new(
+                        error.codes.BAD_REQUEST, invalidParams.array()
+                    ), 
+                    res
+                );
+            }
+        });
+    }
+);
+
+app.route("/api/phases/keys").get(
+    (req, res) => {
+        validate.request(req, {phase: 'query'})
+        .then((invalidParams) => {
+            if (invalidParams.isEmpty()) {
+                phase.getKeys(req.query.phase, res);
+            } else {
+                error.respondWithArr(
+                    error.new(
+                        error.codes.BAD_REQUEST, invalidParams.array()
+                    ), 
+                    res
+                );
+            }
+        });
+    }
+);
+
+app.route("/api/phases/key_values").get(
+    (req, res) => {
+        validate.request(req, {phase_key: 'query'})
+        .then((invalidParams) => {
+            if (invalidParams.isEmpty()) {
+                phase.getKeyValues(req.query.phase_key, res);
+            } else {
+                error.respondWithArr(
+                    error.new(
+                        error.codes.BAD_REQUEST, invalidParams.array()
+                    ), 
+                    res
+                );
+            }
+        });
+    }
+);
+
 /** Redirect mispelled urls to login page*/
-app.route("*").get(showHomeScreen);
+app.route("*").get(
+    (req, res) => {
+        res.status(404).send("api endpoint not found");
+    }
+);
 
 app.listen(app.get("port"), function () {
     console.log("Server running on port " + app.get("port"));

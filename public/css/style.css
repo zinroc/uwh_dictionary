@@ -17,8 +17,22 @@
 
 #top-panel {
     position: relative;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding: 0px;
+}
+
+#phase-panel {
+    position: relative;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding: 0px;
 }
 
 .container {
     width: 100%;
+}
+
+.col-md-12 {
+    padding: 0px;
 }

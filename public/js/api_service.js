@@ -19,5 +19,17 @@ app.factory("api_service", function api_service ($http) {
         return $http.delete(url, { params: data });
     };
 
+    this.getPhases = function () {
+        return this.getJSON("/api/phases");
+    }
+
+    this.getPhaseKeys = function (phase) {
+        return this.getJSON("/api/phases/keys", {phase: phase});
+    }
+
+    this.getPhaseKeyValues = function (phase_key) {
+        return this.getJSON("/api/phases/key_values", {phase_key: phase_key});
+    }
+
     return this;
 });
