@@ -39,31 +39,39 @@ var Phase_Keys = [
     {
         phase: 2,
         keys: [
-            {id: 4, decision: "first_contact", card: "cw_backpick", name: "invertedl_rake", x: 76, y: 2.5, width: 7.5, height: 2.2, el: null},
-            {id: 5, decision: "first_contact", card: "cw_backpick", name: "punch", x: 76, y: 5.5, width: 4.5, height: 2.2, el: null},
-            {id: 6, decision: "first_contact", card: "cw_backpick", name: "barrel_roll", x: 76, y: 8, width: 7, height: 2.1, el: null},
-            {id: 7, decision: "first_contact", card: "ccw_backpick", name: "rake", x: 75.7, y: 14, width: 3.7, height: 2, el: null},
-            {id: 8, decision: "first_contact", card: "ccw_backpick", name: "invertedr_punch", x: 75.5, y: 16.8, width: 9, height: 2.1, el: null},
-            {id: 9, decision: "first_contact", card: "ccw_backpick", name: "punch", x: 75.5, y: 19.7, width: 3.7, height: 2.2, el: null},
-            {id: 10, decision: "first_contact", card: "ccw_backpick", name: "rake_shovel", x: 75.5, y: 22.7, width: 8.4, height: 2.2, el: null},
-            {id: 11, decision: "first_contact", card: "smash", name: "punch_under", x: 82, y: 28.5, width: 14.5, height: 2.2, el: null},
-            {id: 12, decision: "first_contact", card: "smash", name: "punch_roll", x: 82, y: 31.5, width: 14.8, height: 2.2, el: null},
-            {id: 13, decision: "first_contact", card: "smash", name: "invertedr_punch_hotpotatoe", x: 82, y: 38.5, width: 16, height: 2.4, el: null},
-            {id: 14, decision: "first_contact", card: "smash", name: "invertedr_punch_roll", x: 82, y: 41.5, width: 16, height: 2.4, el: null},
-            {id: 15, decision: "first_contact", card: "ccw_tackle", name: "rake_curl", x: 75.5, y: 47, width: 6, height: 2.2, el: null},
-            {id: 16, decision: "first_contact", card: "ccw_tackle", name: "invertedr_curl", x: 75.5, y: 52.5, width: 8, height: 2.2, el: null},
-            {id: 17, decision: "first_contact", card: "cw_tackle", name: "pinch_curl", x: 75.5, y: 58, width: 8, height: 2.6, el: null},
-            {id: 18, decision: "first_contact", card: "cw_tackle", name: "barrel_roll", x: 75.5, y: 61.4, width: 8, height: 2.6, el: null},
+            {id: 4, decision: "first_contact", card: "cw_backpick", name: "invertedl_rake", x: 77, y: 2.5, width: 7.5, height: 2.2, el: null},
+            {id: 5, decision: "first_contact", card: "cw_backpick", name: "punch", x: 77, y: 5.5, width: 4.5, height: 2.2, el: null},
+            {id: 6, decision: "first_contact", card: "cw_backpick", name: "barrel_roll", x: 77, y: 8, width: 7, height: 2.1, el: null},
+            {id: 7, decision: "first_contact", card: "ccw_backpick", name: "rake", x: 76.7, y: 14, width: 3.7, height: 2, el: null},
+            {id: 8, decision: "first_contact", card: "ccw_backpick", name: "invertedr_punch", x: 76.5, y: 16.8, width: 9, height: 2.1, el: null},
+            {id: 9, decision: "first_contact", card: "ccw_backpick", name: "punch", x: 76.5, y: 19.7, width: 3.7, height: 2.2, el: null},
+            {id: 10, decision: "first_contact", card: "ccw_backpick", name: "rake_shovel", x: 76.5, y: 22.7, width: 8.4, height: 2.2, el: null},
+            {id: 11, decision: "first_contact", card: "smash", name: "punch_under", x: 83, y: 28.5, width: 14.5, height: 2.2, el: null},
+            {id: 12, decision: "first_contact", card: "smash", name: "punch_roll", x: 83, y: 31.5, width: 14.8, height: 2.2, el: null},
+            {id: 13, decision: "first_contact", card: "smash", name: "invertedr_punch_hotpotatoe", x: 83, y: 34.8, width: 16, height: 2.4, el: null},
+            {id: 14, decision: "first_contact", card: "smash", name: "invertedr_punch_roll", x: 83, y: 38, width: 16, height: 2.4, el: null},
+            {id: 15, decision: "first_contact", card: "ccw_tackle", name: "rake_curl", x: 76.8, y: 44.2, width: 6, height: 2.2, el: null},
+            {id: 16, decision: "first_contact", card: "ccw_tackle", name: "invertedr_curl", x: 77.3, y: 50, width: 8, height: 2.2, el: null},
+            {id: 17, decision: "first_contact", card: "cw_tackle", name: "pinch_curl", x: 77, y: 55.5, width: 8, height: 2.6, el: null},
+            {id: 18, decision: "first_contact", card: "cw_tackle", name: "barrel_roll", x: 77, y: 58.5, width: 8, height: 2.6, el: null},
         ]
     },
     {
         phase: 3,
-        keys: [
+        keys: [     
+            {id: 26, decision: "exploit_defect", card: "flick_into_defect", name: "piano_keys", x: 86, y: 49.1, width: 11, height: 2.2, el: null}
         ]
     },
     {
         phase: 4,
         keys: [
+            {id: 19, decision: "side_by_side", card: "cut_in_left", name: "layoff", x: 9.7, y: 48, width: 5, height: 1.6, el: null},
+            {id: 20, decision: "side_by_side", card: "cut_in_left", name: "dropoff", x: 9.7, y: 50, width: 7, height: 2, el: null},
+            {id: 21, decision: "side_by_side", card: "cut_in_right", name: "ccw_curl_and_slide", x: 30.5, y: 52, width: 15, height: 1.6, el: null},
+            {id: 22, decision: "side_by_side", card: "cut_in_right", name: "invertedr_dropoff", x: 30.5, y: 59, width: 11, height: 1.6, el: null},
+            {id: 23, decision: "side_by_side", card: "cut_in_right", name: "______dropoff", x: 30.5, y: 68.9, width: 8, height: 2, el: null},
+            {id: 24, decision: "head_on", card: "left_option", name: "crossfrog_pass", x: 4.5, y: 30, width: 9, height: 2, el: null},
+            {id: 25, decision: "head_on", card: "right_option", name: "crossfrog_pass", x: 27, y: 29.5, width: 8.2, height: 1.7, el: null}      
         ]
     }
 ];
@@ -88,6 +96,14 @@ var Phase_Key_Values = [
     {phase_key: 16, value: "InvertedRTackleFromParallel.gif"},
     {phase_key: 17, value: "CWPinchTackleFromParallel.gif"},
     {phase_key: 18, value: "BarrelRollCWTackle.gif"},
+    {phase_key: 19, value: "Layoff.gif"},
+    {phase_key: 20, value: "dropoff.gif"},
+    {phase_key: 21, value: "CCWCurlAndSlide.gif"},
+    {phase_key: 22, value: "InvertedRDropoff.gif"},
+    {phase_key: 23, value: "XJacobX_dropoff.gif"},
+    {phase_key: 24, value: "crossfrog_left.gif"},
+    {phase_key: 25, value: "crossfrog_right.gif"},
+    {phase_key: 26, value: "piano_keys.gif"},
 ]
 
 function get(response) {
