@@ -19,13 +19,40 @@ var Populated_Phase_Keys = [];
 app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
     "use strict";
 
+    $scope.root = "https://uwhdictionary.herokuapp.com";
+    // $scope.root = "http://localhost:8081";
+
+    $scope.urlPhase = null;
+    $scope.urlKey = null;
+
+    $scope.setStateFromURLParams = function () {
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var p = url.searchParams.get("phase");
+        var k = url.searchParams.get("key");
+        // console.log(p, k, "??!?!?");
+        if (typeof p != 'undefined' && typeof k != 'undefined') {
+            $scope.urlPhase = parseInt(p);
+            $scope.urlKey = parseInt(k);
+        }
+    };
+
     $scope.getPhases = function () {
         api_service.getPhases()
         .then(function(response) {
             console.log("got phases");
             console.log(response.data, response.status);
             Phase_Options = response.data;
-            $scope.selectedPhase = response.data[1];
+            if ($scope.urlPhase) {
+                for (var i=0; i<response.data.length; i++){
+                    var phase = response.data[i];
+                    if (phase.id === $scope.urlPhase) {
+                        $scope.selectedPhase = phase;
+                    }
+                }
+            } else {
+                $scope.selectedPhase = response.data[1];
+            }
             $scope.populatePhaseButtons();
             $scope.getPhaseKeys();
         });
@@ -55,7 +82,6 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
 
 
     $scope.selectPhaseKey = function (key) {
-        console.log(key, "<--");
         $scope.selectedPhaseKey = key;
         $scope.getPhaseKeyValues();
     };
@@ -78,6 +104,11 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
             $(key.el).click(function() {
                 $scope.selectPhaseKey(key);
             });
+            if ($scope.urlKey === key.id) {
+                $scope.selectPhaseKey(key);
+                $scope.urlKey = null;
+                $scope.urlPhase = null;
+            }
         });
         return;
     };
@@ -114,5 +145,6 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
         $scope.getPhaseKeys();
     }
 
+    $scope.setStateFromURLParams();
     $scope.getPhases();
 });
