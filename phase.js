@@ -24,7 +24,8 @@ var Phase_Options = [
     {id: 1, name: "Wall_Corner", x: 19.5, y: 23.5, width:12.4, height: 9, el: null},
     {id: 2, name: "Puck_Collection", x: 76.5, y: 47.2, width: 12, height: 12, el: null},
     {id: 3, name: "Puck_Distribution", x: 64.8, y: 80.5, width: 11.9, height: 11.6, el: null},
-    {id: 4, name: "Formation_Displacement", x: 88, y: 80.5, width: 11.7, height: 11.6, el: null}
+    {id: 4, name: "Formation_Displacement", x: 88, y: 80.5, width: 11.7, height: 11.6, el: null},
+    {id: 5, name: "Getting_Into_Position", x: 37, y: 7, width: 16.2, height: 9.2, el: null}
 ];
 
 var Phase_Keys = [
