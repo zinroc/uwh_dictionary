@@ -74,6 +74,20 @@ var Phase_Keys = [
             {id: 24, decision: "head_on", card: "left_option", name: "crossfrog_pass", x: 4.5, y: 30, width: 9, height: 2, el: null},
             {id: 25, decision: "head_on", card: "right_option", name: "crossfrog_pass", x: 27, y: 29.5, width: 8.2, height: 1.7, el: null}      
         ]
+    },
+    {
+        phase: 5,
+        keys: [
+            {id: 27, decision: "get_down", card: "", name: "s_dive", x:17.5, y:19.5, width: 16, height: 3.7, el: null},
+            {id: 28, decision: "get_down", card: "", name: "duck_dive", x:17.5, y:24, width: 16, height: 3, el: null},
+            {id: 29, decision: "choose_body_position", card: "behind_puck", name: "cobra", x:78.5, y:15.5, width: 16, height: 3, el: null},
+            {id: 30, decision: "choose_body_position", card: "behind_puck", name: "icicle", x:78.5, y:20, width: 16, height: 3.5, el: null},
+            {id: 31, decision: "choose_body_position", card: "behind_puck", name: "upside_down", x:78.5, y:24, width: 16, height: 3, el: null},
+            {id: 32, decision: "choose_body_position", card: "ahead_of_puck", name: "backward_cobra", x:78.5, y:37, width: 16, height: 3, el: null},
+            {id: 33, decision: "choose_body_position", card: "ahead_of_puck", name: "retrospective_cobra", x:78.5, y:41, width: 18, height: 3, el: null},
+            {id: 34, decision: "choose_body_position", card: "ahead_of_puck", name: "turkish_fence", x:78.5, y:45, width: 16.5, height: 3, el: null},
+            {id: 35, decision: "choose_body_position", card: "ahead_of_puck", name: "turtle", x:78.5, y:49, width: 16.5, height: 3.2, el: null}
+        ]
     }
 ];
 
@@ -105,6 +119,15 @@ var Phase_Key_Values = [
     {phase_key: 24, value: "crossfrog_left.gif"},
     {phase_key: 25, value: "crossfrog_right.gif"},
     {phase_key: 26, value: "piano_keys.gif"},
+    {phase_key: 27, value: "Sdive.gif"},
+    {phase_key: 28, value: "DuckDive.gif"},
+    {phase_key: 29, value: "Cobra.png"},
+    {phase_key: 30, value: "Turkish_Fence.png"},
+    {phase_key: 31, value: "Upside_Down.png"},
+    {phase_key: 32, value: "Cobra.png"},
+    {phase_key: 33, value: "Retrospective_Cobra.png"},
+    {phase_key: 34, value: "Turkish_Fence.png"},
+    {phase_key: 35, value: "turtle.png"},
 ]
 
 function get(response) {
