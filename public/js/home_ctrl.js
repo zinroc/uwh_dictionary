@@ -51,7 +51,7 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
                     }
                 }
             } else {
-                $scope.selectedPhase = response.data[4];
+                $scope.selectedPhase = response.data[3];
             }
             $scope.populatePhaseButtons();
             $scope.getPhaseKeys();

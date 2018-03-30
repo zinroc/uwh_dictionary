@@ -21,11 +21,11 @@ module.exports = phase = {
 };
 
 var Phase_Options = [
-    {id: 1, name: "Wall_Corner", x: 19.5, y: 23.5, width:12.4, height: 9, el: null},
-    {id: 2, name: "Puck_Collection", x: 76.5, y: 47.2, width: 12, height: 12, el: null},
-    {id: 3, name: "Puck_Distribution", x: 64.8, y: 80.5, width: 11.9, height: 11.6, el: null},
-    {id: 4, name: "Formation_Displacement", x: 88, y: 80.5, width: 11.7, height: 11.6, el: null},
-    {id: 5, name: "Getting_Into_Position", x: 37, y: 7, width: 16.2, height: 9.2, el: null}
+    {id: 1, name: "Wall_Corner", x: 18.2, y: 23.5, width:12.4, height: 9, el: null},
+    {id: 2, name: "Puck_Collection", x: 73, y: 47.2, width: 12, height: 12, el: null},
+    {id: 3, name: "Puck_Distribution", x: 58, y: 80.5, width: 19, height: 11.6, el: null},
+    {id: 4, name: "Formation_Displacement", x: 81.7, y: 80.5, width: 18, height: 11.6, el: null},
+    {id: 5, name: "Getting_Into_Position", x: 35.6, y: 7, width: 16.2, height: 9.2, el: null}
 ];
 
 var Phase_Keys = [
@@ -72,7 +72,15 @@ var Phase_Keys = [
             {id: 22, decision: "side_by_side", card: "cut_in_right", name: "invertedr_dropoff", x: 30.5, y: 59, width: 11, height: 1.6, el: null},
             {id: 23, decision: "side_by_side", card: "cut_in_right", name: "______dropoff", x: 30.5, y: 68.9, width: 8, height: 2, el: null},
             {id: 24, decision: "head_on", card: "left_option", name: "crossfrog_pass", x: 4.5, y: 30, width: 9, height: 2, el: null},
-            {id: 25, decision: "head_on", card: "right_option", name: "crossfrog_pass", x: 27, y: 29.5, width: 8.2, height: 1.7, el: null}      
+            {id: 25, decision: "head_on", card: "right_option", name: "crossfrog_pass", x: 27, y: 29.5, width: 8.2, height: 1.7, el: null},
+            {id: 36, decision: "head_on", card: "left_option", name: "dummy", x: 4.3, y: 15.5, width: 4.8, height: 1.7, el: null},
+            {id: 37, decision: "head_on", card: "left_option", name: "flick_and_chase", x: 4.3, y: 20.2, width: 12, height: 1.7, el: null},
+            {id: 38, decision: "head_on", card: "right_option", name: "fade", x: 27, y: 19.5, width: 3.5, height: 1.7, el: null},
+            {id: 39, decision: "head_on", card: "right_option", name: "flick_and_chase", x: 27, y: 16.3, width: 12, height: 1.7, el: null},
+            {id: 40, decision: "side_by_side", card: "cut_in_left", name: "CW_360_curl", x: 10, y: 52.7, width: 7, height: 1.7, el: null},
+            {id: 41, decision: "side_by_side", card: "cut_in_left", name: "windmill", x: 10, y: 61.7, width: 6, height: 1.7, el: null},
+            {id: 42, decision: "side_by_side", card: "cut_in_right", name: "knuckleR_V", x: 30.5, y: 71.5, width: 7.8, height: 1.7, el: null},
+            {id: 43, decision: "side_by_side", card: "cut_in_right", name: "CCW_360_curl", x: 31, y: 61.5, width: 10.5, height: 1.7, el: null}
         ]
     },
     {
@@ -128,6 +136,14 @@ var Phase_Key_Values = [
     {phase_key: 33, value: "Retrospective_Cobra.png"},
     {phase_key: 34, value: "Turkish_Fence.png"},
     {phase_key: 35, value: "turtle.png"},
+    {phase_key: 36, value: "Dummy.gif"},
+    {phase_key: 37, value: "FlickChaseLeft.gif"},
+    {phase_key: 38, value: "Fade.gif"},
+    {phase_key: 39, value: "FlickChaseRight.gif"},
+    {phase_key: 40, value: "360CWCurl.gif"},
+    {phase_key: 41, value: "windmill.gif"},
+    {phase_key: 42, value: "knuckleV.gif"},
+    {phase_key: 43, value: "360CCWCurl.gif"},
 ]
 
 function get(response) {
