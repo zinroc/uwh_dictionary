@@ -40,7 +40,7 @@ var Phase_Keys = [
     {
         phase: 2,
         keys: [
-            {id: 4, decision: "first_contact", card: "cw_backpick", name: "invertedl_rake", x: 77, y: 2.5, width: 7.5, height: 2.2, el: null},
+            {id: 4, decision: "first_contact", card: "cw_backpick", name: "invertedL_rake", x: 77, y: 2.5, width: 7.5, height: 2.2, el: null},
             {id: 5, decision: "first_contact", card: "cw_backpick", name: "punch", x: 77, y: 5.5, width: 4.5, height: 2.2, el: null},
             {id: 6, decision: "first_contact", card: "cw_backpick", name: "barrel_roll", x: 77, y: 8, width: 7, height: 2.1, el: null},
             {id: 7, decision: "first_contact", card: "ccw_backpick", name: "rake", x: 76.7, y: 14, width: 3.7, height: 2, el: null},
@@ -55,6 +55,11 @@ var Phase_Keys = [
             {id: 16, decision: "first_contact", card: "ccw_tackle", name: "invertedr_curl", x: 77.3, y: 50, width: 8, height: 2.2, el: null},
             {id: 17, decision: "first_contact", card: "cw_tackle", name: "pinch_curl", x: 77, y: 55.5, width: 8, height: 2.6, el: null},
             {id: 18, decision: "first_contact", card: "cw_tackle", name: "barrel_roll", x: 77, y: 58.5, width: 8, height: 2.6, el: null},
+            {id: 49, decision: "first_contact", card: "ccw_tackle", name: "invertedL_rake", x: 77, y: 47.7, width: 8, height: 2.6, el: null},
+            {id: 50, decision: "first_contact", card: "void", name: "arm_punch", x: 61.5, y: 64, width: 12, height: 3.5, el: null},
+            {id: 51, decision: "first_contact", card: "void", name: "bottom_tap_decoy_pass", x: 61.5, y: 67.4, width: 12, height: 3.5, el: null},
+            {id: 52, decision: "first_contact", card: "void", name: "knock_down", x: 61.5, y: 70.7, width: 12, height: 3.5, el: null},
+            {id: 53, decision: "first_contact", card: "void", name: "flick_pass", x: 61.5, y: 74.5, width: 12, height: 1.8, el: null}
         ]
     },
     {
@@ -80,7 +85,12 @@ var Phase_Keys = [
             {id: 40, decision: "side_by_side", card: "cut_in_left", name: "CW_360_curl", x: 10, y: 52.7, width: 7, height: 1.7, el: null},
             {id: 41, decision: "side_by_side", card: "cut_in_left", name: "windmill", x: 10, y: 61.7, width: 6, height: 1.7, el: null},
             {id: 42, decision: "side_by_side", card: "cut_in_right", name: "knuckleR_V", x: 30.5, y: 71.5, width: 7.8, height: 1.7, el: null},
-            {id: 43, decision: "side_by_side", card: "cut_in_right", name: "CCW_360_curl", x: 31, y: 61.5, width: 10.5, height: 1.7, el: null}
+            {id: 43, decision: "side_by_side", card: "cut_in_right", name: "CCW_360_curl", x: 31, y: 61.5, width: 10.5, height: 1.7, el: null},
+            {id: 44, decision: "side_by_side", card: "cut_in_left", name: "Shovel_V", x: 10, y: 57.3, width: 5.5, height: 1.7, el: null},
+            {id: 45, decision: "side_by_side", card: "cut_in_right", name: "Fake_CCW_curl_V", x: 30.5, y: 49.7, width: 10, height: 1.7, el: null},
+            {id: 46, decision: "side_by_side", card: "cut_in_right", name: "Fake_CCW_invertedR_curl_V", x: 30.5, y: 54.3, width: 13, height: 1.7, el: null},
+            {id: 47, decision: "side_by_side", card: "cut_in_right", name: "CCW_360_invertedR_curl", x: 30.5, y: 63.8, width: 15, height: 1.7, el: null},
+            {id: 48, decision: "head_on", card: "left_option", name: "Shovel_V", x: 4, y: 18, width: 4.5, height: 1.7, el: null}
         ]
     },
     {
@@ -142,8 +152,20 @@ var Phase_Key_Values = [
     {phase_key: 39, value: "FlickChaseRight.gif"},
     {phase_key: 40, value: "360CWCurl.gif"},
     {phase_key: 41, value: "windmill.gif"},
+    {phase_key: 41, value: "windmill_head_down_varient.gif"},
     {phase_key: 42, value: "knuckleV.gif"},
     {phase_key: 43, value: "360CCWCurl.gif"},
+    {phase_key: 44, value: "SideBySideShovelV.gif"},
+    {phase_key: 45, value: "FakeCCWcurlV.gif"},
+    {phase_key: 46, value: "FakeInvertedRCurlV.gif"},
+    {phase_key: 47, value: "270InvertedRCurl.gif"},
+    {phase_key: 48, value: "ShovelV.gif"},
+    {phase_key: 49, value: "invertedLRake.gif"},
+    {phase_key: 50, value: "ArmPunch.gif"},
+    {phase_key: 51, value: "TapBottomFake.gif"},
+    {phase_key: 52, value: "KnockDown.gif"},
+    {phase_key: 53, value: "FlickPass.gif"}
+
 ]
 
 function get(response) {
