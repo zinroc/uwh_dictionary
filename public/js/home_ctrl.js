@@ -81,6 +81,14 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
     $scope.selectedPhaseKey = null;
 
 
+    $scope.titleCase = function (str) {
+      str = str.toLowerCase().split('_');
+      for (var i = 0; i < str.length; i++) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+      }
+      return str.join(' ');
+    }
+
     $scope.selectPhaseKey = function (key) {
         $scope.selectedPhaseKey = key;
         $scope.getPhaseKeyValues();
@@ -147,4 +155,44 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
 
     $scope.setStateFromURLParams();
     $scope.getPhases();
+
+
+    $scope.selectKeyBySearchTerm = function(term) {
+        console.log("Selecting term:" + term);
+    }
+
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+
+ 
+    $( "#searchField" )
+      .autocomplete({
+        minLength: 0,
+        source: availableTags,
+        select: function( event, ui ) {
+            $scope.selectKeyBySearchTerm(ui.item.value);
+        }
+      });
 });

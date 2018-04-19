@@ -5,11 +5,15 @@
         <meta charset="utf-8" />
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
     </head>
     <body ng-controller="HomeCtrl" class="ng-cloak" ng-cloak>
     	<div class="container">
-
+            <div id="searchBar" class="row">
+                Search: <input id="searchField" size="50" ng-model="searchValue">
+            </div>
  			<div id="top-panel" class="row image-border">
  				<div class="col-md-12">
  					<img src="/images/Underwater_Hockey.png" height="100%" width="100%" />
@@ -33,8 +37,11 @@
  		<div id="phaseKeyValueModal" class="modal fade">
  			<div class="modal-dialog">
  				<div class="modal-content">
- 					<div class="modal-header">
- 						{{selectedPhaseKey.name}}
+ 					<div class="modal-header" ng-if="selectedPhaseKey">
+                        <b>{{titleCase(selectedPhase.display_name)}}</b>->
+                        <b>{{titleCase(selectedPhaseKey.decision)}}</b>->
+ 						<b>{{titleCase(selectedPhaseKey.card)}}</b>->
+                        <b>{{titleCase(selectedPhaseKey.name)}}</b>
  					</div>
  					<div class="modal-body">
  						<div ng-repeat="value in selectedPhaseKey.values">
@@ -57,4 +64,6 @@
     <script src="js/uwh_dictionary.js"></script>
     <script src="js/api_service.js"></script>
 	<script src="js/home_ctrl.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </html>
