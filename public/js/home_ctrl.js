@@ -100,7 +100,7 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
             console.log("got phase key values");
             console.log(response.data, response.status);
             $scope.selectedPhaseKey.values = response.data;
-            $("#phaseKeyValueModal").modal()
+            $("#phaseKeyValueModal").modal();
         });
     };
 
@@ -187,7 +187,7 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
     ];
 
  
-    $( "#searchField" )
+    $("#searchField")
       .autocomplete({
         minLength: 0,
         source: availableTags,
