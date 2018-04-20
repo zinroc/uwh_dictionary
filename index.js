@@ -83,6 +83,24 @@ app.route("/api/phases/key_values").get(
     }
 );
 
+app.route("/api/phases/search_values").get(
+    (req, res) => {
+        validate.request(req, {})
+        .then((invalidParams) => {
+            if (invalidParams.isEmpty()) {
+                phase.getSearchValues(res);
+            } else {
+                error.respondWithArr(
+                    error.new(
+                        error.codes.BAD_REQUEST, invalidParams.array()                    
+                    ),
+                    res
+                );
+            }
+        });
+    }
+);
+
 /** Redirect mispelled urls to login page*/
 app.route("*").get(
     (req, res) => {

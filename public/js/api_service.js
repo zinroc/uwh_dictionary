@@ -31,5 +31,9 @@ app.factory("api_service", function api_service ($http) {
         return this.getJSON("/api/phases/key_values", {phase_key: phase_key});
     }
 
+    this.getSearchValues = function () {
+        return this.getJSON("/api/phases/search_values");
+    }
+
     return this;
 });

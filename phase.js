@@ -17,7 +17,8 @@ module.exports = phase = {
     // catchChain: catchChain,
     get: get,
     getKeys: getKeys,
-    getKeyValues: getKeyValues
+    getKeyValues: getKeyValues,
+    getSearchValues: getSearchValues
 };
 
 var Phase_Options = [
@@ -192,6 +193,33 @@ function getKeyValues(phase_key, response) {
         }
     });
     response.status(200).json(values);    
+}
+
+function getPhaseFromId(id) {
+    let phase = null;
+    Phase_Options.forEach(function(o) {
+        if (id === o.id) {
+            phase = o;
+        }
+    });
+    return phase;
+}
+
+function getSearchValues (response) {
+    let search_values = [];
+    Phase_Keys.forEach(function(p) {
+        let phase = getPhaseFromId(p.phase);
+        if (phase === null) {
+            response.status(500).send("could not find phase options");
+        }
+        let keys = p.keys;
+        keys.forEach(function(k) {
+            let label = phase.display_name + "_->_" + k.decision + "_->_" + k.card + "_->_" + k.name;
+            let value = "{\"phase\": " + phase.id + ", \"key\": " + k.id + "}";
+            search_values.push({label: label, value: value});
+        });
+    });
+    response.status(200).json(search_values);
 }
 
 function catchChain (response) {

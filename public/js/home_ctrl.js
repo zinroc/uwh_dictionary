@@ -58,6 +58,18 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
         });
     };
 
+    $scope.selectPhaseById = function (id) {
+        let phase = null;
+        Phase_Options.forEach(function(o) {
+            if (o.id === id) {
+                phase = o;
+            }
+        });
+        if (phase) {
+            $scope.selectPhase(phase);
+        }
+    }
+
     $scope.getPhaseKeys = function () {
         api_service.getPhaseKeys($scope.selectedPhase.id)
         .then(function(response) {
@@ -66,6 +78,10 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
             $scope.depopulatePhaseKeys();
             Phase_Keys = response.data;
             $scope.populatePhaseKeys();
+            if (autoSelectPhaseKeyId > 0) {
+                $scope.selectPhaseKeyById(autoSelectPhaseKeyId);
+                autoSelectPhaseKeyId = -1;
+            }
         });
     };
 
@@ -94,6 +110,16 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
         $scope.getPhaseKeyValues();
     };
 
+    $scope.selectPhaseKeyById = function (id) {
+        let key = null;
+        Phase_Keys.forEach(function(k) {
+            if (k.id === id){
+                key = k;
+            }
+        });
+        $scope.selectPhaseKey(key);
+    };
+
     $scope.getPhaseKeyValues = function () {
         api_service.getPhaseKeyValues($scope.selectedPhaseKey.id)
         .then(function(response) {
@@ -104,8 +130,37 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
         });
     };
 
+    $scope.cleanAvailableTags = function (tags) {
+        let cleanTags = [];
+        tags.forEach(function(t) {
+            let cleanLabel = $scope.titleCase(t.label);
+            cleanTags.push({label: cleanLabel, value: t.value});
+        });
+        return cleanTags;
+    }
+
+    $scope.getSearchValues = function () {
+        api_service.getSearchValues()
+        .then(function(response) {
+            console.log("got search values");
+            console.log(response.data, response.status);
+            var availableTags = response.data;
+            availableTags = $scope.cleanAvailableTags(availableTags);
+
+            $("#searchField")
+              .autocomplete({
+                minLength: 0,
+                source: availableTags,
+                select: function( event, ui ) {
+                    $scope.selectKeyBySearchTerm(ui.item.value);
+                }
+              });
+        }); 
+    }
+
     $scope.populatePhaseKeys = function () {
         Phase_Keys.forEach(function(key) {
+
             var el = $($scope.UIButton(key.name, key.x, key.y, key.width, key.height)).appendTo("#phase-panel");
             key.el = el;
 
@@ -144,6 +199,10 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
 
     $scope.selectPhase = function(phase) {
         if ($scope.selectPhase && $scope.selectPhase.id === phase.id) {
+            if (autoSelectPhaseKeyId > 0) {
+                $scope.selectPhaseKeyById(autoSelectPhaseKeyId);
+                autoSelectPhaseKeyId = -1;
+            }
             return;
         }
 
@@ -153,46 +212,19 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
         $scope.getPhaseKeys();
     }
 
+
+
     $scope.setStateFromURLParams();
     $scope.getPhases();
+    $scope.getSearchValues();
 
+
+    let autoSelectPhaseKeyId = -1;
 
     $scope.selectKeyBySearchTerm = function(term) {
-        console.log("Selecting term:" + term);
+        var json = JSON.parse(term);
+        $scope.selectPhaseById(json.phase);
+        autoSelectPhaseKeyId = json.key;
     }
 
-    var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-
- 
-    $("#searchField")
-      .autocomplete({
-        minLength: 0,
-        source: availableTags,
-        select: function( event, ui ) {
-            $scope.selectKeyBySearchTerm(ui.item.value);
-        }
-      });
 });
