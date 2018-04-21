@@ -24,7 +24,7 @@ module.exports = phase = {
 var Phase_Options = [
     {id: 1, display_name: "Wall_Corner", name: "Wall_Corner", x: 18.2, y: 23.5, width:12.4, height: 9, el: null},
     {id: 2, display_name: "Puck_Collection", name: "Puck_Collection", x: 73, y: 47.2, width: 12, height: 12, el: null},
-    {id: 3, display_name: "Weaken_Opposing_Formation", name: "Puck_Distribution", x: 58, y: 80.5, width: 19, height: 11.6, el: null},
+    {id: 3, display_name: "Claim_Empty_Space", name: "Puck_Distribution", x: 58, y: 80.5, width: 19, height: 11.6, el: null},
     {id: 4, display_name: "Eliminate_Opposing_Player", name: "Formation_Displacement", x: 81.7, y: 80.5, width: 18, height: 11.6, el: null},
     {id: 5, display_name: "Getting_Into_Position", name: "Getting_Into_Position", x: 35.6, y: 7, width: 16.2, height: 9.2, el: null}
 ];
@@ -66,7 +66,7 @@ var Phase_Keys = [
     {
         phase: 3,
         keys: [     
-            {id: 26, decision: "exploit_defect", card: "flick_into_defect", name: "piano_keys", x: 86, y: 49.1, width: 11, height: 2.2, el: null}
+            {id: 26, decision: "take_empty_space", card: "flick_into_space", name: "piano_keys", x: 84.2, y: 58.9, width: 11.5, height: 2.7, el: null}
         ]
     },
     {
