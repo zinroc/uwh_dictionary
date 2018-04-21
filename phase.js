@@ -91,7 +91,8 @@ var Phase_Keys = [
             {id: 45, decision: "side_by_side", card: "cut_in_right", name: "Fake_CCW_curl_V", x: 30.5, y: 49.7, width: 10, height: 1.7, el: null},
             {id: 46, decision: "side_by_side", card: "cut_in_right", name: "Fake_CCW_invertedR_curl_V", x: 30.5, y: 54.3, width: 13, height: 1.7, el: null},
             {id: 47, decision: "side_by_side", card: "cut_in_right", name: "CCW_360_invertedR_curl", x: 30.5, y: 63.8, width: 15, height: 1.7, el: null},
-            {id: 48, decision: "head_on", card: "left_option", name: "Shovel_V", x: 4, y: 18, width: 4.5, height: 1.7, el: null}
+            {id: 48, decision: "head_on", card: "left_option", name: "Shovel_V", x: 4, y: 18, width: 4.5, height: 1.7, el: null},
+            {id: 54, decision: "side_by_side", card: "cut_in_left", name: "Shovel_Pass", x: 10, y: 59.5, width: 7, height: 1.7, el: null}
         ]
     },
     {
@@ -165,7 +166,8 @@ var Phase_Key_Values = [
     {phase_key: 50, value: "ArmPunch.gif"},
     {phase_key: 51, value: "TapBottomFake.gif"},
     {phase_key: 52, value: "KnockDown.gif"},
-    {phase_key: 53, value: "FlickPass.gif"}
+    {phase_key: 53, value: "FlickPass.gif"},
+    {phase_key: 54, value: "ShovelPass_Parallel.gif"}
 
 ]
 
