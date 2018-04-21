@@ -81,6 +81,10 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
             if (autoSelectPhaseKeyId > 0) {
                 $scope.selectPhaseKeyById(autoSelectPhaseKeyId);
                 autoSelectPhaseKeyId = -1;
+
+                $("html, body").animate({
+                    scrollTop: $("#phase-panel").offset().top
+                }, 500);
             }
         });
     };
