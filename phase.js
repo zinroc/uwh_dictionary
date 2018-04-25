@@ -35,7 +35,14 @@ var Phase_Keys = [
         keys: [
             {id: 1, decision: "left_wall", card: "leaving", name: "invertedr_v", x: 11.5, y: 81, width:14, height: 2.2, el: null},
             {id: 2, decision: "left_wall", card: "leaving", name: "pinch_v", x: 11.5, y: 63, width:5, height: 2.4, el: null},
-            {id: 3, decision: "left_wall", card: "leaving", name: "rakeroll_fade", x: 11.5, y: 60.2, width:12, height: 2.4, el: null}
+            {id: 3, decision: "left_wall", card: "leaving", name: "rakeroll_fade", x: 11.5, y: 60.2, width:12, height: 2.4, el: null},
+            {id: 55, decision: "right_wall", card: "leaving", name: "windmill_180_kickoff", x: 74.5, y: 82, width:12, height: 2.4, el: null},
+            {id: 56, decision: "right_wall", card: "leaving", name: "windmill", x: 74.5, y: 79.2, width:5, height: 2.4, el: null},
+            {id: 57, decision: "right_wall", card: "leaving", name: "InvertedR_rakeroll_shovel_V", x: 74.5, y: 60, width:13, height: 2.4, el: null},
+            {id: 58, decision: "left_wall", card: "leaving", name: "reverse_windmill", x: 12, y: 88.3, width:7, height: 2.4, el: null},
+            {id: 59, decision: "left_wall", card: "leaving", name: "InvertedR_CCW_Curl_Kickoff", x: 12, y: 84.5, width:20, height: 2.4, el: null},
+            {id: 60, decision: "left_wall", card: "leaving", name: "CCW_Curl_Kickoff", x: 12, y: 66, width:15, height: 2.4, el: null},
+            {id: 61, decision: "right_wall", card: "leaving", name: "CW_Pinch_Curl_Kickoff", x: 74.5, y: 66.7, width:18, height: 2.4, el: null}
         ]
     },
     {
@@ -167,7 +174,14 @@ var Phase_Key_Values = [
     {phase_key: 51, value: "TapBottomFake.gif"},
     {phase_key: 52, value: "KnockDown.gif"},
     {phase_key: 53, value: "FlickPass.gif"},
-    {phase_key: 54, value: "ShovelPass_Parallel.gif"}
+    {phase_key: 54, value: "ShovelPass_Parallel.gif"},
+    {phase_key: 55, value: "WindmillCurlKickoff.gif"},
+    {phase_key: 56, value: "Windmill_Wall.gif"},
+    {phase_key: 57, value: "InvertedRRakeRollShovelV.gif"},
+    {phase_key: 58, value: "ReverseWindmill_Wall.gif"},
+    {phase_key: 59, value: "InvertedLCCWCurlKickoff.gif"},
+    {phase_key: 60, value: "CCWCurlKickoff.gif"},
+    {phase_key: 61, value: "CWPinchCurlKickoff.gif"}
 
 ]
 
