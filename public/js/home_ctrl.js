@@ -11,16 +11,19 @@ var getCookie = function (key) {
         return o[key];
     }
 
-var Phase_Options = [];
+var Phase_Options = this.PhaseInfo.Phase_Options;
+
+var All_Phase_Keys = this.PhaseInfo.Phase_Keys;
+
+var Phase_Key_Values = this.PhaseInfo.Phase_Key_Values;
 
 var Phase_Keys = [];
 
-var Populated_Phase_Keys = [];
-app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
+app.controller("HomeCtrl", function homeCtrl ($scope) {
     "use strict";
 
-    $scope.root = "https://uwhdictionary.herokuapp.com";
-    // $scope.root = "http://localhost:8081";
+    //$scope.root = "https://uwhdictionary.herokuapp.com";
+    $scope.root = "http://localhost:8081";
 
     $scope.urlPhase = null;
     $scope.urlKey = null;
@@ -30,32 +33,29 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
         var url = new URL(url_string);
         var p = url.searchParams.get("phase");
         var k = url.searchParams.get("key");
-        // console.log(p, k, "??!?!?");
+        //console.log(p, k, "??!?!?");
         if (typeof p != 'undefined' && typeof k != 'undefined') {
             $scope.urlPhase = parseInt(p);
             $scope.urlKey = parseInt(k);
         }
     };
 
-    $scope.getPhases = function () {
-        api_service.getPhases()
-        .then(function(response) {
-            console.log("got phases");
-            console.log(response.data, response.status);
-            Phase_Options = response.data;
-            if ($scope.urlPhase) {
-                for (var i=0; i<response.data.length; i++){
-                    var phase = response.data[i];
-                    if (phase.id === $scope.urlPhase) {
-                        $scope.selectedPhase = phase;
-                    }
+    $scope.initPhase = function () {
+        if ($scope.urlPhase) {
+            for (var i=0; i<Phase_Options.length; i++){
+                var phase = Phase_Options[i];
+                if (phase.id === $scope.urlPhase) {
+                    //$scope.selectPhase(phase);
+                    $scope.selectedPhase = phase;
                 }
-            } else {
-                $scope.selectedPhase = response.data[1];
             }
-            $scope.populatePhaseButtons();
-            $scope.getPhaseKeys();
-        });
+        } else {
+            //phase = Phase_Options[1]);
+            $scope.selectedPhase = Phase_Options[1];
+        }
+        //$scope.populatePhaseButtons();
+        $scope.setPhaseKeys();
+        //$scope.selectPhase($scope.selectedPhase);
     };
 
     $scope.selectPhaseById = function (id) {
@@ -70,26 +70,23 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
         }
     }
 
-    $scope.getPhaseKeys = function () {
-        api_service.getPhaseKeys($scope.selectedPhase.id)
-        .then(function(response) {
-            console.log("got phase keys");
-            console.log(response.data, response.status);
-            $scope.depopulatePhaseKeys();
-            Phase_Keys = response.data;
-            $scope.populatePhaseKeys();
-            if (autoSelectPhaseKeyId > 0) {
-                $scope.selectPhaseKeyById(autoSelectPhaseKeyId);
-                autoSelectPhaseKeyId = -1;
-
-                $("html, body").animate({
-                    scrollTop: $("#phase-panel").offset().top
-                }, 500);
-            }
+    $scope.setPhaseKeys = function () {
+        $scope.depopulatePhaseKeys();
+        All_Phase_Keys.forEach(function(keys) {
+            if (keys.phase == $scope.selectedPhase.id)
+                Phase_Keys = keys.keys;
         });
+        $scope.populatePhaseKeys();
+        if (autoSelectPhaseKeyId > 0) {
+            $scope.selectPhaseKeyById(autoSelectPhaseKeyId);
+            autoSelectPhaseKeyId = -1;
+
+            $("html, body").animate({
+                scrollTop: $("#phase-panel").offset().top
+            }, 500);
+        }
     };
 
-    $scope.selectedPhase = null;
 
     $scope.depopulatePhaseKeys = function () {
         Phase_Keys.forEach(function(key) {
@@ -97,9 +94,6 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
         });
         return;
     };
-
-    $scope.selectedPhaseKey = null;
-
 
     $scope.titleCase = function (str) {
       str = str.toLowerCase().split('_');
@@ -111,11 +105,17 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
 
     $scope.selectPhaseKey = function (key) {
         $scope.selectedPhaseKey = key;
-        $scope.getPhaseKeyValues();
+        $scope.setPhaseKeyValues();
+        //console.log(key, "$$$")
+        if (!init){
+            $scope.$apply();
+        }
+        $("#phaseKeyValueModal").modal();
     };
 
     $scope.selectPhaseKeyById = function (id) {
         let key = null;
+        //console.log(id, "###");
         Phase_Keys.forEach(function(k) {
             if (k.id === id){
                 key = k;
@@ -124,14 +124,18 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
         $scope.selectPhaseKey(key);
     };
 
-    $scope.getPhaseKeyValues = function () {
-        api_service.getPhaseKeyValues($scope.selectedPhaseKey.id)
-        .then(function(response) {
-            console.log("got phase key values");
-            console.log(response.data, response.status);
-            $scope.selectedPhaseKey.values = response.data;
-            $("#phaseKeyValueModal").modal();
+    $scope.setPhaseKeyValues = function () {
+        let values = [];
+        Phase_Key_Values.forEach(function(v) {
+            if (v.phase_key == $scope.selectedPhaseKey.id)
+                values.push(v.value);
         });
+
+        $scope.selectedPhaseKey.values = values;
+        // console.log($scope.selectedPhaseKey.id, "<---");
+        // setTimeout(function() {
+        //     
+        // }, 1000);
     };
 
     $scope.cleanAvailableTags = function (tags) {
@@ -143,28 +147,46 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
         return cleanTags;
     }
 
-    $scope.getSearchValues = function () {
-        api_service.getSearchValues()
-        .then(function(response) {
-            console.log("got search values");
-            console.log(response.data, response.status);
-            var availableTags = response.data;
-            availableTags = $scope.cleanAvailableTags(availableTags);
+    $scope.initSearchValues = function () {
+        let search_values = [];
+        All_Phase_Keys.forEach(function(p) {
+            let phase = getPhaseFromId(p.phase);
+            if (phase === null) {
+                console.log("could not find search values...");
+            }
+            let keys = p.keys;
+            keys.forEach(function(k) {
+                let label = phase.display_name + "_->_" + k.decision + "_->_" + k.card + "_->_" + k.name;
+                let value = "{\"phase\": " + phase.id + ", \"key\": " + k.id + "}";
+                search_values.push({label: label, value: value});
+            });
+        });
 
-            $("#searchField")
-              .autocomplete({
-                minLength: 0,
-                source: availableTags,
-                select: function( event, ui ) {
-                    $scope.selectKeyBySearchTerm(ui.item.value);
-                }
-              });
-        }); 
+        let availableTags = search_values;
+        availableTags = $scope.cleanAvailableTags(availableTags);
+
+        $("#searchField")
+          .autocomplete({
+            minLength: 0,
+            source: availableTags,
+            select: function( event, ui ) {
+                $scope.selectKeyBySearchTerm(ui.item.value);
+            }
+          });
+    }
+
+    function getPhaseFromId(id) {
+        let phase = null;
+        Phase_Options.forEach(function(o) {
+            if (id === o.id) {
+                phase = o;
+            }
+        });
+        return phase;
     }
 
     $scope.populatePhaseKeys = function () {
-        Phase_Keys.forEach(function(key) {
-
+        Phase_Keys.forEach(function(key, i) {
             var el = $($scope.UIButton(key.name, key.x, key.y, key.width, key.height)).appendTo("#phase-panel");
             key.el = el;
 
@@ -202,8 +224,10 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
     }
 
     $scope.selectPhase = function(phase) {
-        if ($scope.selectPhase && $scope.selectPhase.id === phase.id) {
+
+        if ($scope.selectedPhase && $scope.selectedPhase.id === phase.id) {
             if (autoSelectPhaseKeyId > 0) {
+                console.log(autoSelectPhaseKeyId, "???");
                 $scope.selectPhaseKeyById(autoSelectPhaseKeyId);
                 autoSelectPhaseKeyId = -1;
             }
@@ -211,24 +235,29 @@ app.controller("HomeCtrl", function homeCtrl ($scope, api_service) {
         }
 
         $scope.selectedPhase = phase;
-        $scope.$apply();
+        if (!init)
+            $scope.$apply();
 
-        $scope.getPhaseKeys();
+        $scope.setPhaseKeys();
     }
-
-
-
-    $scope.setStateFromURLParams();
-    $scope.getPhases();
-    $scope.getSearchValues();
-
-
-    let autoSelectPhaseKeyId = -1;
 
     $scope.selectKeyBySearchTerm = function(term) {
         var json = JSON.parse(term);
-        $scope.selectPhaseById(json.phase);
         autoSelectPhaseKeyId = json.key;
+
+        $scope.selectPhaseById(json.phase);
     }
+
+    $scope.selectedPhase = null;
+    $scope.selectedPhaseKey = null;
+    var autoSelectPhaseKeyId = -1;
+
+    var init = true;
+    $scope.populatePhaseButtons();
+    $scope.setStateFromURLParams();
+    $scope.initPhase();
+    $scope.initSearchValues();
+    init = false;
+
 
 });

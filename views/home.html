@@ -17,8 +17,8 @@
  					<img src="/images/Underwater_Hockey.png" height="100%" width="100%" />
  				</div>
  			</div>
- 			<div id="phase-panel" class="row image-border" ng-if="selectedPhase">
- 				<div class="col-md-12">
+ 			<div id="phase-panel" class="row image-border">
+ 				<div class="col-md-12" ng-if="selectedPhase">
  					<img src="/images/{{selectedPhase.name}}.png" height="100%" width="100%" />
  				</div>
  			</div>
@@ -55,12 +55,14 @@
  				</div>
  			</div>
  		</div>
+        {{selectedPhaseKey}}
     </body>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="js/uwh_dictionary.js"></script>
-    <script src="js/api_service.js"></script>
+    <!-- <script src="js/api_service.js"></script> -->
+    <script src="js/phase.js"></script>
 	<script src="js/home_ctrl.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </html>
