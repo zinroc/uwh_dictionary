@@ -83,7 +83,14 @@ PhaseInfo.Phase_Keys = [
             {id: 46, decision: "side_by_side", card: "cut_in_right", name: "Fake_CCW_invertedR_curl_V", x: 8.7, y: 79.4, width: 16, height: 2, el: null},
             {id: 47, decision: "side_by_side", card: "cut_in_right", name: "CCW_360_invertedR_curl", x: 9.8, y: 81.4, width: 15, height: 2.2, el: null},
             {id: 48, decision: "head_on", card: "left_option", name: "Shovel_V", x: 27.6, y: 5.3, width: 7, height: 2.2, el: null},
-            {id: 54, decision: "side_by_side", card: "cut_in_left", name: "Shovel_Pass", x: 12.5, y: 65.8, width: 12.5, height: 2.2, el: null}
+            {id: 54, decision: "side_by_side", card: "cut_in_left", name: "Shovel_Pass", x: 12.5, y: 65.8, width: 12.5, height: 2.2, el: null},
+            {id: 62, decision: "head_on", card: "right_option", name: "Leapfrog_Pass", x: 54.5, y: 5.45, width: 14.7, height: 2.2, el: null},
+            {id: 63, decision: "head_on", card: "left_option", name: "Leapfrog_Pass", x: 27.7, y: 7.5, width: 14.7, height: 2.2, el: null},
+            {id: 64, decision: "head_on", card: "left_option", name: "Shovel_Pass", x: 27.7, y: 11.5, width: 17, height: 2.2, el: null},
+            {id: 65, decision: "head_on", card: "right_option", name: "Flick_Pass", x: 54.5, y: 9.6, width: 17, height: 2.2, el: null},
+            {id: 66, decision: "head_on", card: "right_option", name: "Flick_Pass_Forward", x: 54.5, y: 11.5, width: 17, height: 2.2, el: null},
+            {id: 67, decision: "head_on", card: "left_option", name: "Flick_Pass_Forward", x: 27.7, y: 13.5, width: 17, height: 2.2, el: null},
+            {id: 68, decision: "side_by_side", card: "cut_in_right", name: "Inverted_R_Layoff", x: 12.5, y: 88, width: 12.5, height: 2.2, el: null}
         ]
     },
     {
@@ -123,6 +130,7 @@ PhaseInfo.Phase_Key_Values = [
     {phase_key: 17, value: "CWPinchTackleFromParallel.gif"},
     {phase_key: 18, value: "BarrelRollCWTackle.gif"},
     {phase_key: 19, value: "Layoff.gif"},
+    {phase_key: 19, value: "CWLayoff2.gif"},
     {phase_key: 20, value: "dropoff.gif"},
     {phase_key: 21, value: "CCWCurlAndSlide.gif"},
     {phase_key: 22, value: "InvertedRDropoff.gif"},
@@ -165,8 +173,14 @@ PhaseInfo.Phase_Key_Values = [
     {phase_key: 58, value: "ReverseWindmill_Wall.gif"},
     {phase_key: 59, value: "InvertedLCCWCurlKickoff.gif"},
     {phase_key: 60, value: "CCWCurlKickoff.gif"},
-    {phase_key: 61, value: "CWPinchCurlKickoff.gif"}
-
+    {phase_key: 61, value: "CWPinchCurlKickoff.gif"},
+    {phase_key: 62, value: "LeapfrogPassRight.gif"},
+    {phase_key: 63, value: "LeapfrogPassLeft2.gif"},
+    {phase_key: 64, value: "ShovelPassHeadOn2.gif"},
+    {phase_key: 65, value: "FlickPassRight.gif"},
+    {phase_key: 66, value: "FlickPassForwardRightOption.gif"},
+    {phase_key: 67, value: "FlickPassForwardLeftOption.gif"},
+    {phase_key: 68, value: "InvertedRLayoff.gif"}
 ];
 
 

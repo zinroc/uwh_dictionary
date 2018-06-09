@@ -51,7 +51,7 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
             }
         } else {
             //phase = Phase_Options[1]);
-            $scope.selectedPhase = Phase_Options[1];
+            $scope.selectedPhase = Phase_Options[3];
         }
         //$scope.populatePhaseButtons();
         $scope.setPhaseKeys();
