@@ -24,8 +24,8 @@ var Super_Phase_Buttons = [];
 app.controller("HomeCtrl", function homeCtrl ($scope) {
     "use strict";
 
-    //$scope.root = "https://uwhdictionary.herokuapp.com";
-    $scope.root = "http://localhost:8081";
+    $scope.root = "https://uwhdictionary.herokuapp.com";
+    //$scope.root = "http://localhost:8081";
 
     $scope.urlPhase = null;
     $scope.urlKey = null;
