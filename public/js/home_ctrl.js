@@ -19,6 +19,8 @@ var Phase_Key_Values = this.PhaseInfo.Phase_Key_Values;
 
 var Phase_Keys = [];
 
+var Super_Phase_Buttons = [];
+
 app.controller("HomeCtrl", function homeCtrl ($scope) {
     "use strict";
 
@@ -51,7 +53,7 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
             }
         } else {
             //phase = Phase_Options[1]);
-            $scope.selectedPhase = Phase_Options[3];
+            $scope.selectedPhase = Phase_Options[5];
         }
         //$scope.populatePhaseButtons();
         $scope.setPhaseKeys();
@@ -204,7 +206,29 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
 
     $scope.populatePhaseButtons = function () {
         Phase_Options.forEach(function(phase) {
-            var el = $($scope.UIButton(phase.name, phase.x, phase.y, phase.width, phase.height)).appendTo("#top-panel");
+            if (phase.height != 0){
+
+                var el = $($scope.UIButton(phase.name, phase.x, phase.y, phase.width, phase.height, true)).appendTo("#top-panel");
+
+                $(el).click(function() {
+                    $scope.selectPhase(phase);
+                    $("html, body").animate({
+                        scrollTop: $("#phase-panel").offset().top
+                    }, 500);
+                });
+            }
+        });
+    }
+
+    $scope.setSuperPhaseButtons = function () {
+        $scope.selectedPhase.super_phases.forEach(function(sp) {
+            let phase = null;
+            Phase_Options.forEach(function(p) {
+                if (p.id == sp)
+                    phase = p;
+            });
+
+            var el = $($scope.UIButton(phase.name, phase.x, phase.y, 16, 3)).appendTo("#phase-panel");
 
             $(el).click(function() {
                 $scope.selectPhase(phase);
@@ -213,21 +237,26 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
                 }, 500);
             });
 
+            Super_Phase_Buttons.push(el);
         });
     }
 
-    $scope.UIButton = function (name, left, top, width, height) {
+    $scope.UIButton = function (name, left, top, width, height, isCircle = false) {
         let s1 = '<div id="'+ name +'" class="phase-button" style="position: absolute; left: '+ left +'%; top: ';
-        let s2 = top +'%; width: '+ width +'%; height: '+ height +'%"';
-        let s3 = '></div>';
-        return s1 + s2 + s3;
+        let s2 = top +'%; width: '+ width +'%; height: '+ height +'%';
+        let s3  = '; border-radius: 50%';
+        let s4  = '"></div>';
+        if (isCircle) {
+            return s1 + s2 + s3 + s4;
+        } else {
+            return s1 + s2 + s4;
+        }
     }
 
     $scope.selectPhase = function(phase) {
 
         if ($scope.selectedPhase && $scope.selectedPhase.id === phase.id) {
             if (autoSelectPhaseKeyId > 0) {
-                console.log(autoSelectPhaseKeyId, "???");
                 $scope.selectPhaseKeyById(autoSelectPhaseKeyId);
                 autoSelectPhaseKeyId = -1;
             }
@@ -238,8 +267,19 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
         if (!init)
             $scope.$apply();
 
+        $scope.removeSuperPhaseButtons();
+        $scope.setSuperPhaseButtons();
         $scope.setPhaseKeys();
     }
+
+    $scope.removeSuperPhaseButtons = function () {
+        Super_Phase_Buttons.forEach(function(sp) {
+            $(sp).remove();
+        });
+        Super_Phase_Buttons = [];
+    }
+
+
 
     $scope.selectKeyBySearchTerm = function(term) {
         var json = JSON.parse(term);

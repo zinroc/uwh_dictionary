@@ -6,27 +6,25 @@
 this.PhaseInfo = {}
 
 PhaseInfo.Phase_Options = [
-    {id: 1, display_name: "Wall_Corner", name: "Wall_Corner", x: 18.2, y: 23.5, width:12.4, height: 9, el: null},
-    {id: 2, display_name: "Puck_Collection", name: "Puck_Collection", x: 73, y: 47.2, width: 12, height: 12, el: null},
-    {id: 3, display_name: "Claim_Empty_Space", name: "Puck_Distribution", x: 58, y: 80.5, width: 19, height: 11.6, el: null},
-    {id: 4, display_name: "Eliminate_Opposing_Player", name: "Formation_Displacement", x: 81.7, y: 80.5, width: 18, height: 11.6, el: null},
-    {id: 5, display_name: "Getting_Into_Position", name: "Getting_Into_Position", x: 35.6, y: 7, width: 16.2, height: 9.2, el: null}
+    {id: 1, display_name: "Wall_Left", name: "Wall_Left", x: 39.25, y: 40.75, width: 2, height: 4, el: null, super_phases: []},
+    {id: 2, display_name: "Puck_Collection", name: "Puck_Collection", x: 57.5, y: 37, width: 8, height: 16, el: null, super_phases: [3, 4]},
+    {id: 2, display_name: "Puck_Collection", name: "Puck_Collection", x: 3.5, y: 2, width: 0, height: 0, el: null, super_phases: [3, 4]},
+    {id: 3, display_name: "Claim_Empty_Space", name: "Puck_Distribution", x: 3.5, y: 5, width: 0, height: 0, el: null, super_phases: [2, 4]},
+    {id: 4, display_name: "Eliminate_Opposing_Player", name: "Formation_Displacement", x: 3.5, y: 9, width: 0, height: 0, el: null, super_phases: [2, 3]},
+    {id: 5, display_name: "Getting_Into_Position", name: "Getting_Into_Position", x: 27.5, y: 46, width: 8, height: 16, el: null, super_phases: []},
+    {id: 6, display_name: "Wall_Right", name: "Wall_Right", x: 66, y: 59, width: 3, height: 6, el: null, super_phases: []}
 ];
 
 PhaseInfo.Phase_Keys = [
     {
         phase: 1,
         keys: [
-            {id: 1, decision: "left_wall", card: "leaving", name: "invertedr_v", x: 11.5, y: 81, width:14, height: 2.2, el: null},
-            {id: 2, decision: "left_wall", card: "leaving", name: "pinch_v", x: 11.5, y: 63, width:5, height: 2.4, el: null},
-            {id: 3, decision: "left_wall", card: "leaving", name: "rakeroll_fade", x: 11.5, y: 60.2, width:12, height: 2.4, el: null},
-            {id: 55, decision: "right_wall", card: "leaving", name: "windmill_180_kickoff", x: 74.5, y: 82, width:12, height: 2.4, el: null},
-            {id: 56, decision: "right_wall", card: "leaving", name: "windmill", x: 74.5, y: 79.2, width:5, height: 2.4, el: null},
-            {id: 57, decision: "right_wall", card: "leaving", name: "InvertedR_rakeroll_shovel_V", x: 74.5, y: 60, width:13, height: 2.4, el: null},
-            {id: 58, decision: "left_wall", card: "leaving", name: "reverse_windmill", x: 12, y: 88.3, width:7, height: 2.4, el: null},
-            {id: 59, decision: "left_wall", card: "leaving", name: "InvertedR_CCW_Curl_Kickoff", x: 12, y: 84.5, width:20, height: 2.4, el: null},
-            {id: 60, decision: "left_wall", card: "leaving", name: "CCW_Curl_Kickoff", x: 12, y: 66, width:15, height: 2.4, el: null},
-            {id: 61, decision: "right_wall", card: "leaving", name: "CW_Pinch_Curl_Kickoff", x: 74.5, y: 66.7, width:18, height: 2.4, el: null}
+            {id: 1, decision: "left_wall", card: "leaving", name: "invertedr_v", x: 65, y: 72, width:25, height: 6, el: null},
+            {id: 2, decision: "left_wall", card: "leaving", name: "pinch_v", x: 65, y: 30, width:8, height: 6, el: null},
+            {id: 3, decision: "left_wall", card: "leaving", name: "rakeroll_fade", x: 65, y: 23, width:20, height: 6, el: null},
+            {id: 58, decision: "left_wall", card: "leaving", name: "reverse_windmill", x: 65, y: 89, width:11, height: 6, el: null},
+            {id: 59, decision: "left_wall", card: "leaving", name: "InvertedR_CCW_Curl_Kickoff", x: 65, y: 81, width: 33, height: 6, el: null},
+            {id: 60, decision: "left_wall", card: "leaving", name: "CCW_Curl_Kickoff", x: 65, y: 37.5, width: 28, height: 6, el: null}
         ]
     },
     {
@@ -105,6 +103,15 @@ PhaseInfo.Phase_Keys = [
             {id: 33, decision: "choose_body_position", card: "ahead_of_puck", name: "retrospective_cobra", x:78.5, y:41, width: 18, height: 3, el: null},
             {id: 34, decision: "choose_body_position", card: "ahead_of_puck", name: "turkish_fence", x:78.5, y:45, width: 16.5, height: 3, el: null},
             {id: 35, decision: "choose_body_position", card: "ahead_of_puck", name: "turtle", x:78.5, y:49, width: 16.5, height: 3.2, el: null}
+        ]
+    },
+    {
+        phase: 6,
+        keys: [
+            {id: 55, decision: "right_wall", card: "leaving", name: "windmill_180_kickoff", x: 65, y: 88, width:17, height: 7, el: null},
+            {id: 56, decision: "right_wall", card: "leaving", name: "windmill", x: 65, y: 81, width:7, height: 5, el: null},
+            {id: 57, decision: "right_wall", card: "leaving", name: "InvertedR_rakeroll_shovel_V", x: 65, y: 25, width:18, height: 7, el: null},
+            {id: 61, decision: "right_wall", card: "leaving", name: "CW_Pinch_Curl_Kickoff", x: 65, y: 45, width:32, height: 7, el: null}
         ]
     }
 ];
