@@ -182,7 +182,7 @@ PhaseInfo.Phase_Key_Values = [
     {phase_key: 60, value: "CCWCurlKickoff.gif"},
     {phase_key: 61, value: "CWPinchCurlKickoff.gif"},
     {phase_key: 62, value: "LeapfrogPassRight.gif"},
-    {phase_key: 63, value: "LeapfrogPassLeft2.gif"},
+    {phase_key: 63, value: "LeapFrogPassLeft2.gif"},
     {phase_key: 64, value: "ShovelPassHeadOn2.gif"},
     {phase_key: 65, value: "FlickPassRight.gif"},
     {phase_key: 66, value: "FlickPassForwardRightOption.gif"},
