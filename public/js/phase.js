@@ -6,13 +6,13 @@
 this.PhaseInfo = {}
 
 PhaseInfo.Phase_Options = [
-    {id: 1, display_name: "Wall_Left", name: "Wall_Left", x: 39.25, y: 40.75, width: 2, height: 4, el: null, super_phases: []},
-    {id: 2, display_name: "Puck_Collection", name: "Puck_Collection", x: 57.5, y: 37, width: 8, height: 16, el: null, super_phases: [3, 4]},
+    {id: 1, display_name: "Wall_Left", name: "Wall_Left", x: 41, y: 49, width: 2, height: 3, el: null, super_phases: []},
+    {id: 2, display_name: "Puck_Collection", name: "Puck_Collection", x: 58.5, y: 46.7, width: 8, height: 13.3, el: null, super_phases: [3, 4]},
     {id: 2, display_name: "Puck_Collection", name: "Puck_Collection", x: 3.5, y: 2, width: 0, height: 0, el: null, super_phases: [3, 4]},
     {id: 3, display_name: "Claim_Empty_Space", name: "Puck_Distribution", x: 3.5, y: 5, width: 0, height: 0, el: null, super_phases: [2, 4]},
     {id: 4, display_name: "Eliminate_Opposing_Player", name: "Formation_Displacement", x: 3.5, y: 9, width: 0, height: 0, el: null, super_phases: [2, 3]},
-    {id: 5, display_name: "Getting_Into_Position", name: "Getting_Into_Position", x: 27.5, y: 46, width: 8, height: 16, el: null, super_phases: []},
-    {id: 6, display_name: "Wall_Right", name: "Wall_Right", x: 66, y: 59, width: 3, height: 6, el: null, super_phases: []}
+    {id: 5, display_name: "Getting_Into_Position", name: "Getting_Into_Position", x: 29.5, y: 54, width: 8, height: 13, el: null, super_phases: []},
+    {id: 6, display_name: "Wall_Right", name: "Wall_Right", x: 67, y: 63.7, width: 3, height: 5, el: null, super_phases: []}
 ];
 
 PhaseInfo.Phase_Keys = [
@@ -94,15 +94,15 @@ PhaseInfo.Phase_Keys = [
     {
         phase: 5,
         keys: [
-            {id: 27, decision: "get_down", card: "", name: "s_dive", x:17.5, y:19.5, width: 16, height: 3.7, el: null},
-            {id: 28, decision: "get_down", card: "", name: "duck_dive", x:17.5, y:24, width: 16, height: 3, el: null},
-            {id: 29, decision: "choose_body_position", card: "behind_puck", name: "cobra", x:78.5, y:15.5, width: 16, height: 3, el: null},
-            {id: 30, decision: "choose_body_position", card: "behind_puck", name: "icicle", x:78.5, y:20, width: 16, height: 3.5, el: null},
-            {id: 31, decision: "choose_body_position", card: "behind_puck", name: "upside_down", x:78.5, y:24, width: 16, height: 3, el: null},
-            {id: 32, decision: "choose_body_position", card: "ahead_of_puck", name: "backward_cobra", x:78.5, y:37, width: 16, height: 3, el: null},
-            {id: 33, decision: "choose_body_position", card: "ahead_of_puck", name: "retrospective_cobra", x:78.5, y:41, width: 18, height: 3, el: null},
-            {id: 34, decision: "choose_body_position", card: "ahead_of_puck", name: "turkish_fence", x:78.5, y:45, width: 16.5, height: 3, el: null},
-            {id: 35, decision: "choose_body_position", card: "ahead_of_puck", name: "turtle", x:78.5, y:49, width: 16.5, height: 3.2, el: null}
+            {id: 27, decision: "get_down", card: "", name: "s_dive", x:49.5, y:13, width: 16, height: 3.7, el: null},
+            {id: 28, decision: "get_down", card: "", name: "duck_dive", x:49.5, y:17, width: 16, height: 3.7, el: null},
+            {id: 29, decision: "choose_body_position", card: "behind_puck", name: "cobra", x:6, y:29.5, width: 16, height: 3.7, el: null},
+            {id: 30, decision: "choose_body_position", card: "behind_puck", name: "icicle", x:6, y:33.8, width: 16, height: 3.7, el: null},
+            {id: 31, decision: "choose_body_position", card: "behind_puck", name: "upside_down", x:6, y:37.2, width: 16, height: 3.7, el: null},
+            {id: 32, decision: "choose_body_position", card: "ahead_of_puck", name: "backward_cobra", x:6, y:50.5, width: 16, height: 3.7, el: null},
+            {id: 33, decision: "choose_body_position", card: "ahead_of_puck", name: "retrospective_cobra", x:6, y:54.5, width: 16, height: 3.7, el: null},
+            {id: 34, decision: "choose_body_position", card: "ahead_of_puck", name: "turkish_fence", x:6, y:59, width: 16, height: 3.7, el: null},
+            {id: 35, decision: "choose_body_position", card: "ahead_of_puck", name: "turtle", x:6, y:63, width: 16, height: 3.7, el: null}
         ]
     },
     {
