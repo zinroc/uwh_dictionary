@@ -10,18 +10,64 @@
     <body ng-controller="HomeCtrl" class="ng-cloak" ng-cloak>
     	<div class="container">
             <div id="searchBar" class="row">
-                Search: <input id="searchField" size="50" ng-model="searchValue">
+                If you know the name of the technique <br /> Search for it here:
+                <br />
+                <input id="searchField" size="50" ng-model="searchValue"> 
+                <br />
+                Otherwise, look for it in the contextual flow chart below
             </div>
  			<div id="top-panel" class="row image-border">
  				<div class="col-md-12">
  					<img src="/images/Underwater_Hockey.png" height="100%" width="100%" />
  				</div>
  			</div>
- 			<div id="phase-panel" class="row image-border">
+
+ 			<!-- <div id="phase-panel" class="row image-border">
  				<div class="col-md-12" ng-if="selectedPhase">
  					<img src="/images/{{selectedPhase.name}}.png" height="100%" width="100%" />
  				</div>
- 			</div>
+ 			</div> -->
+            <div class="row" id="phase-panel-V2">
+                <div ng-if="selectedPhase" >
+                    <div class="phase-title">
+                        {{titleCase(display(selectedPhase.name))}}
+                    </div>
+                    <div class="super-phase-button" ng-repeat="value in superPhaseButtons" ng-click="selectPhaseByName(value)">
+                        {{titleCase(display(value))}}
+                    </div>
+                    <div class="phase-chart-container">
+                        <div ng-repeat="puck in selectedPhasePucks" style="left: {{puck.pin.x}}px; top: {{puck.pin.y}}px;" class="puck">
+                            <div class="puck-title">
+                                {{titleCase(puck.name)}}
+                            </div>
+                            <div ng-repeat="track in puck.tracks" class="track" style="height: {{track.length}}px; top: {{track.pin.y + 100}}px; left: {{track.pin.x + 50}}px; transform: rotate({{track.rotation}}deg);">
+                            </div>
+                            <div ng-repeat="arrow in puck.arrows">
+                                <div class="arrow-{{arrow.direction}}">
+                                </div>
+                                <div ng-if="arrow.mini_track" class="mini_track" style="left: {{arrow.mini_track.pin.x}}px; top:{{arrow.mini_track.pin.y}}px; height:{{arrow.mini_track.height}}px;">
+                                </div>
+                                <div class="subtitle" ng-if="arrow.subtitle" style="left: {{arrow.subtitle.pin.x}}px; top: {{arrow.subtitle.pin.y}}px;">
+                                    {{titleCase(display(arrow.subtitle.name))}}
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-repeat="card in selectedPhaseCards" style="left:
+                            {{card.pin.x}}px; top: {{card.pin.y}}px" class="card">
+                            <h3 ng-if="card.decision !== selectedPhase.name"> {{titleCase(card.title)}}</h3>
+
+                            <div ng-repeat="key in selectedPhaseKeys"
+                                ng-if="key.card === card.title && key.decision === card.decision"
+                                ng-click="key.active ? selectPhaseKey(key, true) : null"
+                                class="skillButton-{{key.active ? 'active' : 'inactive'}} {{selectedPhaseKey.id === key.id ? 'selected' : 'unselected'}} " 
+                            >
+                                {{titleCase(key.name)}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
  			<div class="row">
  				<div class="col-md-12">
  				</div>
@@ -37,7 +83,7 @@
  				<div class="modal-content">
  					<div class="modal-header" ng-if="selectedPhaseKey">
                         <b>{{titleCase(selectedPhase.display_name)}}</b>->
-                        <b>{{titleCase(selectedPhaseKey.decision)}}</b>->
+                        <b ng-if="selectedPhase.name !== selectedPhaseKey.decision">{{titleCase(selectedPhaseKey.decision)}} -> </b>
  						<b>{{titleCase(selectedPhaseKey.card)}}</b>->
                         <b>{{titleCase(selectedPhaseKey.name)}}</b>
  					</div>

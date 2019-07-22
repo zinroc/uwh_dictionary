@@ -1,8 +1,64 @@
+.skillButton-active {
+    cursor: pointer;
+    min-width: 200px;
+    border: red 1px solid;
+    height: 45px;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.skillButton-inactive {
+    cursor: not-allowed;
+    min-width: 200px;
+    border: red 1px solid;
+    height: 45px;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    color: grey;
+}
+
+.skillButton-active:hover {
+    background-color: pink;
+}
+
+.selected {
+    background-color: pink;
+    border: black solid 5px;
+}
+
 #searchBar {
     background-color: lightblue;
-    height: 25px;
+    height: 600px;
     width: 100vw;
     text-align: center;
+    font-size: 42px;
+    padding-top: 200px;
+}
+
+.mini_track {
+    background-color: red;
+    width: 10px;
+    border: 1px;
+    position: absolute;
+    z-index: 999;
+}
+
+.phase-title {
+    color: #700a05;
+    font-size: 45px;
+    font-weight: 700;
+    padding: 5%;
+    padding-bottom: 2%;
+}
+
+.phase-chart-container {
+    position: relative;
+}
+
+.title-container {
+    padding: 5%;
 }
 
 .phase-button {
@@ -28,6 +84,13 @@
     padding: 0px;
 }
 
+#phase-panel-V2 {
+    position: relative;
+    margin-right: 0px;
+    margin-left: 200px;
+    padding: 0px;
+}
+
 #phase-panel {
     position: relative;
     margin-right: 0px;
@@ -41,4 +104,130 @@
 
 .col-md-12 {
     padding: 0px;
+}
+
+.super-phase-button {
+    color: #700a05;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 28px;
+    cursor: pointer;
+    border: black solid 3px;
+    width: 300px;
+    margin-bottom: 10px;
+    margin-left: 5%;
+}
+
+.super-phase-button:hover {
+    background-color: pink;
+}
+
+.puck {
+    background-color: #1e1e1e;
+    color: black;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: solid 20px #ea3f3f;
+
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    position: absolute;
+}
+
+.puck-title {
+    padding: 25px;
+    position: absolute;
+}
+
+.puck-column-0 {
+    left: 10%;
+}
+
+.card {
+    color: #ea3f3f;
+    position: absolute;
+}
+
+.card h3 {
+    font-weight: 600;
+}
+
+.puck-column-1 {
+    position: relative;
+    left: 40%;
+}
+
+.puck-column-2 {
+    position: relative;
+    left: 80%;
+}
+
+.subtitle {
+    color: red;
+    text-decoration: underline;
+    position: absolute;
+    font-weight: 900;
+    font-size: 36px;
+}
+
+.track {
+    background-color: red;
+    width: 50px;
+    position: absolute;
+    z-index: -1;
+}
+
+.arrow-up {
+  width: 0; 
+  height: 0; 
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  
+  border-bottom: 50px solid red;
+  position: absolute;
+  left: 25px;
+  top: -100px;
+}
+
+.arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  
+  border-top: 50px solid red;
+  position: absolute;
+
+  left: 25px;
+  top: 215px;
+}
+
+.arrow-right {
+  width: 0; 
+  height: 0; 
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  
+  border-left: 50px solid red;
+  position: absolute;
+
+  left: 200px;
+  top: 25px;
+}
+
+.arrow-left {
+  width: 0; 
+  height: 0; 
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent; 
+  
+  border-right:50px solid red;
+  left: -100px; 
+  top: 25px;
+  position: absolute;
 }

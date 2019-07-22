@@ -17,6 +17,10 @@ var All_Phase_Keys = this.PhaseInfo.Phase_Keys;
 
 var Phase_Key_Values = this.PhaseInfo.Phase_Key_Values;
 
+var All_Phase_Pucks = this.PhaseInfo.Pucks;
+
+var All_Cards = this.PhaseInfo.Cards;
+
 var Phase_Keys = [];
 
 var Super_Phase_Buttons = [];
@@ -30,17 +34,26 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
     $scope.urlPhase = null;
     $scope.urlKey = null;
 
+
     $scope.setStateFromURLParams = function () {
         var url_string = window.location.href;
         var url = new URL(url_string);
         var p = url.searchParams.get("phase");
         var k = url.searchParams.get("key");
-        //console.log(p, k, "??!?!?");
         if (typeof p != 'undefined' && typeof k != 'undefined') {
             $scope.urlPhase = parseInt(p);
             $scope.urlKey = parseInt(k);
         }
     };
+
+    $scope.setPhase = function (apply = true) {
+        $scope.setSuperPhaseButtons();
+        $scope.setPhasePucks();
+        $scope.setPhaseKeys();
+        $scope.setPhaseCards();
+        if (!init && apply)
+            $scope.$apply();
+    }
 
     $scope.initPhase = function () {
         if ($scope.urlPhase) {
@@ -51,14 +64,27 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
                     $scope.selectedPhase = phase;
                 }
             }
+            autoSelectPhaseKeyId = $scope.urlKey;
         } else {
             //phase = Phase_Options[1]);
-            $scope.selectedPhase = Phase_Options[5];
+            $scope.selectedPhase = Phase_Options[3];
         }
         //$scope.populatePhaseButtons();
-        $scope.setPhaseKeys();
+        $scope.setPhase();
         //$scope.selectPhase($scope.selectedPhase);
     };
+
+    $scope.selectPhaseByName = function (name) {
+        let phase = null;
+        Phase_Options.forEach(function(o) {
+            if (o.name === name) {
+                phase = o;
+            }
+        });
+        if (phase) {
+            $scope.selectPhaseV2(phase);
+        }
+    }
 
     $scope.selectPhaseById = function (id) {
         let phase = null;
@@ -72,30 +98,52 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
         }
     }
 
-    $scope.setPhaseKeys = function () {
-        $scope.depopulatePhaseKeys();
-        All_Phase_Keys.forEach(function(keys) {
-            if (keys.phase == $scope.selectedPhase.id)
-                Phase_Keys = keys.keys;
+    $scope.setPhaseCards = function () {
+        $scope.selectedPhaseCards = [];
+        All_Cards.forEach(function(cards) {
+            if (cards.phase === $scope.selectedPhase.id)
+            {
+                $scope.selectedPhaseCards = cards.cards;
+            }
         });
-        $scope.populatePhaseKeys();
+    }
+
+    $scope.setPhasePucks = function () {
+        $scope.selectedPhasePucks = [];
+        All_Phase_Pucks.forEach(function(pucks) {
+            if (pucks.phase == $scope.selectedPhase.id)
+            {
+                $scope.selectedPhasePucks = pucks.pucks;
+            }
+        });
+    }
+
+    $scope.setPhaseKeys = function () {
+        //$scope.depopulatePhaseKeys();
+        $scope.selectedPhaseKeys = [];
+        All_Phase_Keys.forEach(function(keys) {
+            if (keys.phase == $scope.selectedPhase.id) {
+                Phase_Keys = keys.keys;
+                $scope.selectedPhaseKeys = keys.keys;
+            }
+        });
         if (autoSelectPhaseKeyId > 0) {
             $scope.selectPhaseKeyById(autoSelectPhaseKeyId);
             autoSelectPhaseKeyId = -1;
 
-            $("html, body").animate({
-                scrollTop: $("#phase-panel").offset().top
-            }, 500);
+            //$("html, body").animate({
+            //    scrollTop: $("#phase-panel-V2").offset().top
+            //}, 500);
         }
     };
 
 
-    $scope.depopulatePhaseKeys = function () {
+    /** $scope.depopulatePhaseKeys = function () {
         Phase_Keys.forEach(function(key) {
             $(key.el).remove();
         });
         return;
-    };
+    }; **/
 
     $scope.titleCase = function (str) {
       str = str.toLowerCase().split('_');
@@ -105,19 +153,19 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
       return str.join(' ');
     }
 
-    $scope.selectPhaseKey = function (key) {
+    $scope.selectPhaseKey = function (key, newVersion = false) {
         $scope.selectedPhaseKey = key;
         $scope.setPhaseKeyValues();
-        //console.log(key, "$$$")
-        if (!init){
-            $scope.$apply();
-        }
+        //if (!init){
+            //if (!newVersion) {
+                //$scope.$apply();
+            //}
+        //}
         $("#phaseKeyValueModal").modal();
     };
 
     $scope.selectPhaseKeyById = function (id) {
         let key = null;
-        //console.log(id, "###");
         Phase_Keys.forEach(function(k) {
             if (k.id === id){
                 key = k;
@@ -134,10 +182,7 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
         });
 
         $scope.selectedPhaseKey.values = values;
-        // console.log($scope.selectedPhaseKey.id, "<---");
-        // setTimeout(function() {
-        //     
-        // }, 1000);
+
     };
 
     $scope.cleanAvailableTags = function (tags) {
@@ -158,9 +203,14 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
             }
             let keys = p.keys;
             keys.forEach(function(k) {
-                let label = phase.display_name + "_->_" + k.decision + "_->_" + k.card + "_->_" + k.name;
-                let value = "{\"phase\": " + phase.id + ", \"key\": " + k.id + "}";
-                search_values.push({label: label, value: value});
+                if (k.active) {
+                    let label = phase.display_name + "_->_" + k.decision + "_->_" + k.card + "_->_" + k.name;
+                    if (phase.name === k.decision) {
+                        label = phase.display_name + "_->_" + k.card + "_->_" + k.name;
+                    }
+                    let value = "{\"phase\": " + phase.id + ", \"key\": " + k.id + "}";
+                    search_values.push({label: label, value: value});
+                }
             });
         });
 
@@ -187,7 +237,24 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
         return phase;
     }
 
-    $scope.populatePhaseKeys = function () {
+    $scope.display = function(p) {
+        switch(p)
+        {
+            case "Puck_Distribution": {
+                return "Claim_Empty_Space";
+            } case "Formation_Displacement": {
+                return "Eliminate_Opposing_Player";
+            } case "Wall_Left": {
+                return "Left_Wall";
+            } case "Wall_Right": {
+                return "Right_Wall";
+            } default: {
+                return p;
+            }
+        }
+    }
+
+    /** $scope.populatePhaseKeys = function () {
         Phase_Keys.forEach(function(key, i) {
             var el = $($scope.UIButton(key.name, key.x, key.y, key.width, key.height)).appendTo("#phase-panel");
             key.el = el;
@@ -202,7 +269,7 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
             }
         });
         return;
-    };
+    }; **/
 
     $scope.populatePhaseButtons = function () {
         Phase_Options.forEach(function(phase) {
@@ -213,7 +280,7 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
                 $(el).click(function() {
                     $scope.selectPhase(phase);
                     $("html, body").animate({
-                        scrollTop: $("#phase-panel").offset().top
+                        scrollTop: $("#phase-panel-V2").offset().top
                     }, 500);
                 });
             }
@@ -233,11 +300,12 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
             $(el).click(function() {
                 $scope.selectPhase(phase);
                 $("html, body").animate({
-                    scrollTop: $("#phase-panel").offset().top
+                    scrollTop: $("#phase-panel-V2").offset().top
                 }, 500);
             });
-
+            $scope.superPhaseButtons.push(phase.name);
             Super_Phase_Buttons.push(el);
+            // $scope.$apply();
         });
     }
 
@@ -253,6 +321,23 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
         }
     }
 
+    $scope.selectPhaseV2 = function(phase) {
+        if ($scope.selectedPhase && $scope.selectedPhase.id === phase.id) {
+            if (autoSelectPhaseKeyId > 0) {
+                $scope.selectPhaseKeyById(autoSelectPhaseKeyId);
+                autoSelectPhaseKeyId = -1;
+            }
+            return;
+        }
+
+        $scope.selectedPhase = phase;
+        //if (!init)
+            // $scope.$apply();
+
+        $scope.removeSuperPhaseButtons();
+        $scope.setPhase(false);
+    }
+
     $scope.selectPhase = function(phase) {
 
         if ($scope.selectedPhase && $scope.selectedPhase.id === phase.id) {
@@ -264,12 +349,11 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
         }
 
         $scope.selectedPhase = phase;
-        if (!init)
-            $scope.$apply();
+        //if (!init)
+            // $scope.$apply();
 
         $scope.removeSuperPhaseButtons();
-        $scope.setSuperPhaseButtons();
-        $scope.setPhaseKeys();
+        $scope.setPhase();
     }
 
     $scope.removeSuperPhaseButtons = function () {
@@ -277,6 +361,8 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
             $(sp).remove();
         });
         Super_Phase_Buttons = [];
+        $scope.superPhaseButtons = [];
+        // $scope.$apply();
     }
 
 
@@ -284,12 +370,15 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
     $scope.selectKeyBySearchTerm = function(term) {
         var json = JSON.parse(term);
         autoSelectPhaseKeyId = json.key;
-
         $scope.selectPhaseById(json.phase);
     }
-
+    $scope.superPhaseButtons = [];
     $scope.selectedPhase = null;
+    $scope.selectedPhasePucks = [];
     $scope.selectedPhaseKey = null;
+    $scope.selectedPhaseCards = [];
+    $scope.selectedPhaseKeys = [];
+
     var autoSelectPhaseKeyId = -1;
 
     var init = true;

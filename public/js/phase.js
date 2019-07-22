@@ -7,119 +7,415 @@ this.PhaseInfo = {}
 
 PhaseInfo.Phase_Options = [
     {id: 1, display_name: "Wall_Left", name: "Wall_Left", x: 41, y: 49, width: 2, height: 3, el: null, super_phases: []},
-    {id: 2, display_name: "Puck_Collection", name: "Puck_Collection", x: 58.5, y: 46.7, width: 8, height: 13.3, el: null, super_phases: [3, 4]},
-    {id: 2, display_name: "Puck_Collection", name: "Puck_Collection", x: 3.5, y: 2, width: 0, height: 0, el: null, super_phases: [3, 4]},
-    {id: 3, display_name: "Claim_Empty_Space", name: "Puck_Distribution", x: 3.5, y: 5, width: 0, height: 0, el: null, super_phases: [2, 4]},
-    {id: 4, display_name: "Eliminate_Opposing_Player", name: "Formation_Displacement", x: 3.5, y: 9, width: 0, height: 0, el: null, super_phases: [2, 3]},
+    {id: 2, display_name: "Puck_Collection", name: "Puck_Collection", x: 58.5, y: 46.7, width: 8, height: 13.3, el: null, super_phases: [/** 3, **/ 4]},
+    //{id: 2, display_name: "Puck_Collection", name: "Puck_Collection", x: 3.5, y: 2, width: 0, height: 0, el: null, super_phases: [3, 4]},
+    //{id: 3, display_name: "Claim_Empty_Space", name: "Puck_Distribution", x: 3.5, y: 5, width: 0, height: 0, el: null, super_phases: [2, 4]},
+    {id: 4, display_name: "Eliminate_Opposing_Player", name: "Formation_Displacement", x: 3.5, y: 9, width: 0, height: 0, el: null, super_phases: [2 /**,  3 **/]},
     {id: 5, display_name: "Getting_Into_Position", name: "Getting_Into_Position", x: 29.5, y: 54, width: 8, height: 13, el: null, super_phases: []},
     {id: 6, display_name: "Wall_Right", name: "Wall_Right", x: 67, y: 63.7, width: 3, height: 5, el: null, super_phases: []}
+];
+
+PhaseInfo.Pucks = [
+    {
+        phase: 1,
+        pucks: [
+            {id: 1, name: "Advancing", pin: {x: 100, y: 0}, tracks: [], arrows: [{mini_track: null, direction: "down"}]},
+            {id: 2, name: "Stalling", pin: {x: 500, y: 0}, tracks: [], arrows: [{mini_track: null, direction: "down"}]},
+            {id: 3, name: "Leaving", pin: {x: 900, y: 0}, tracks: [], arrows: [{mini_track: null, direction:"down"}]}
+        ]
+    },
+    {
+        phase: 2,
+        pucks: [
+            {
+                id: 1,
+                name: "First_Contact",
+                pin: {x: 500, y: 0},
+                tracks: [{length: 300, pin: {x: 0, y: 0}, rotation: 0}],
+                arrows: [{mini_track: { height: 1300, pin: {x: 255, y: 0}}, direction:"right"}]
+            },
+            {
+                id: 2,
+                name: "Deal_With_Threats",
+                pin: {x: 500, y: 400},
+                tracks: [{length: 700, pin: {x: 0, y: 0}, rotation: 0}, {length: 500, pin: {x: -125, y: 300}, rotation: 30}],
+                arrows: [{mini_track: { height: 300, pin: {x: -115, y: -100}}, direction:"left"}]
+            },
+            {id: 3, name: "Eliminate_Opposing_Player", pin: {x: 500, y: 1200}, tracks: [], arrows: []},
+            {id: 4, name: "Claim_Empty_Space", pin: {x: 200, y: 1200}, tracks: [], arrows: []}
+        ]
+    },
+    /** {
+        phase: 3,
+        pucks: [
+            {id: 1, name: "Create_Empty_Space", pin: {x: 500, y: 0}, tracks: [{length: 400, pin: {x: 0, y: 0}, rotation: 0}], arrows: [{mini_track: null, direction: "right"}]},
+            {id: 2, name: "Take_Empty_Space", pin: {x: 500, y: 500}, tracks: [{length: 400, pin: {x: 0, y: 0}, rotation: 0}], arrows: [{mini_track: null, direction:"left"}]},
+            {id: 3, name: "Puck_Collection", pin: {x: 500, y: 1000}, tracks: [], arrows: []}
+        ]
+    }, **/
+    {
+        phase: 4,
+        pucks: [
+            {
+                id: 1,
+                name: "Opponents_Orientation",
+                pin: {x: 500, y: 450},
+                tracks: [{length: 400, pin: {x: 0, y: 0}, rotation: 0}],
+                arrows: [
+                    {mini_track: {height: 1100, pin: {x: -180, y: -400}}, direction:"left", subtitle: {name: "side_by_side", pin: {x: -450, y: -410}}},
+                    {mini_track: null, direction:"right", subtitle: {name: "behind_under", pin: {x: 330, y: -310}}},
+                    {mini_track: {height: 900, pin: {x: 310, y: -300}}, direction:"up", subtitle: {name: "head_on", pin: {x: -20, y: -175}}}
+                ]
+            },
+            {id: 2, name: "Steal_Opponents_Position", pin: {x: 500, y: 850}, tracks: [{length: 400, pin: {x: 0, y: 0}, rotation: 0}], arrows: []},
+            {id: 3, name: "Puck_Collection", pin: {x: 500, y: 1250}, tracks: [], arrows: []}
+        ]
+    },
+    {
+        phase: 5,
+        pucks: [
+            { 
+                id: 1,
+                name: "Get_Down",
+                pin: {x: 400, y: 0},
+                tracks: [{length: 500, pin: {x: 0, y: 0}, rotation: 0}],
+                arrows: [{mini_track: {height: 150, pin: {x: 255, y: 0}}, direction:"right"}]
+            },
+            {
+                id: 2,
+                name: "Choose_Body_Position",
+                pin: {x: 400, y: 600},
+                tracks: [{length: 500, pin: {x: 0, y: 0}, rotation: 0}],
+                arrows: [{mini_track: {height: 700, pin: {x: -115, y: -400}}, direction:"left"}]
+            },
+            {
+                id: 3,
+                name: "Threat_Awareness",
+                pin: {x: 400, y: 1200},
+                tracks: [],
+                arrows: [{mini_track: {height: 650, pin: {x: 255, y: -500}}, direction:"right"}]
+            }
+        ]
+    },
+    {
+        phase: 6,
+        pucks: [
+            {id: 1, name: "Advancing", pin: {x: 100, y: 0}, tracks: [], arrows: [{mini_track: null, direction:"down"}]},
+            {id: 2, name: "Stalling", pin: {x: 500, y: 0}, tracks: [], arrows: [{mini_track: null, direction:"down"}]},
+            {id: 3, name: "Leaving", pin: {x: 900, y: 0}, tracks: [], arrows: [{mini_track: null, direction:"down"}]}
+        ]
+    }
+];
+
+PhaseInfo.Cards = [
+    {
+        phase: 4,
+        cards: [
+            {title: "left_option", decision: "head_on", pin: {x: 400, y: -100}},
+            {title: "right_option", decision: "head_on", pin: {x: 625, y: -100}},
+            {title: "outside_options", decision: "side_by_side", pin: {x: 100, y: 100}},
+            {title: "cut_in_left", decision: "side_by_side", pin: {x: 100, y: 265}},
+            {title: "cut_in_right", decision: "side_by_side", pin: {x: 100, y: 600}},
+            {title: "forward_options", decision: "behind_under", pin: {x: 850, y: 265}},
+            {title: "left_option", decision: "behind_under", pin: {x: 850, y: 450}},
+            {title: "right_option", decision: "behind_under", pin: {x: 850, y: 650}}
+        ]
+    },
+    {
+
+        phase: 5,
+        cards: [
+            {title: "dives", decision: "get_down", pin: {x: 700, y: 0}},
+            {title: "behind_puck", decision: "choose_body_position", pin: {x: 50, y: 200}},
+            {title: "ahead_of_puck", decision: "choose_body_position", pin: {x: 50, y: 700}},
+            {title: "scout_opposing_players", decision: "Threat_Awareness", pin: {x: 700, y: 700}},
+            {title: "visualize_opposition", decision: "Threat_Awareness", pin: {x: 700, y: 1000}}
+        ]
+    },
+    {
+        phase: 2,
+        cards: [
+            {title: "cw_backpick", decision: "first_contact", pin: {x: 800, y: 0}},
+            {title: "ccw_backpick", decision: "first_contact", pin: {x: 800, y: 200}},
+            {title: "smash", decision: "first_contact", pin: {x: 800, y: 450}},
+            {title: "ccw_tackle", decision: "first_contact", pin: {x: 800, y: 700}},
+            {title: "cw_tackle", decision: "first_contact", pin: {x: 800, y: 900}},
+            {title: "void", decision: "first_contact", pin: {x: 800, y: 1050}},
+            {title: "protect_and_stall", decision: "Deal_With_Threats", pin: {x: 170, y: 300}},
+        ]
+    },
+    {
+        phase: 6,
+        cards: [
+            {title: "Advancing", decision: "Wall_Right", pin: {x: 100, y: 300}},
+            {title: "Stalling", decision: "Wall_Right", pin: {x: 500, y: 300}},
+            {title: "Leaving", decision: "Wall_Right", pin: {x: 900, y: 300}}
+        ]
+    },
+    {
+        phase: 1,
+        cards: [
+            {title: "Advancing", decision: "Wall_Left", pin: {x: 100, y: 300}},
+            {title: "Stalling", decision: "Wall_Left", pin: {x: 500, y: 300}},
+            {title: "Leaving", decision: "Wall_Left", pin: {x: 900, y: 300}}
+        ]
+    }
 ];
 
 PhaseInfo.Phase_Keys = [
     {
         phase: 1,
         keys: [
-            {id: 1, decision: "left_wall", card: "leaving", name: "invertedr_v", x: 69, y: 72.5, width:25, height: 6, el: null},
-            {id: 2, decision: "left_wall", card: "leaving", name: "pinch_v", x: 69, y: 32, width:8, height: 6, el: null},
-            {id: 3, decision: "left_wall", card: "leaving", name: "rakeroll_fade", x: 69, y: 24, width:20, height: 6, el: null},
-            {id: 58, decision: "left_wall", card: "leaving", name: "reverse_windmill", x: 69, y: 89, width:16, height: 6, el: null},
-            {id: 59, decision: "left_wall", card: "leaving", name: "InvertedR_CCW_Curl_Kickoff", x: 69, y: 81, width: 33, height: 6, el: null},
-            {id: 60, decision: "left_wall", card: "leaving", name: "CCW_Curl_Kickoff", x: 69, y: 39.5, width: 28, height: 6, el: null}
+            {id: 1, decision: "Wall_Left", card: "Leaving", name: "invertedr_v", active: true},
+            {id: 2, decision: "Wall_Left", card: "Leaving", name: "pinch_v", active: true},
+            {id: 3, decision: "Wall_Left", card: "Leaving", name: "rakeroll_fade", active: true},
+            {id: 58, decision: "Wall_Left", card: "Leaving", name: "reverse_windmill", active: true},
+            {id: 59, decision: "Wall_Left", card: "Leaving", name: "InvertedR_CCW_Curl_Kickoff", active: true},
+            {id: 60, decision: "Wall_Left", card: "Leaving", name: "CCW_Curl_Kickoff", active: true},
+            {id: 112, decision: "Wall_Left", card: "Advancing", name: "inverted_L_hotpotatoe", active: false},
+            {id: 113, decision: "Wall_Left", card: "Advancing", name: "vertical_rake_hotpotatoe", active: false},
+            {id: 114, decision: "Wall_Left", card: "Advancing", name: "inverted_L_spike", active: false},
+            {id: 115, decision: "Wall_Left", card: "Advancing", name: "punch", active: false},
+            {id: 116, decision: "Wall_Left", card: "Advancing", name: "inverted_L_rake", active: false},
+            {id: 117, decision: "Wall_Left", card: "Stalling", name: "shoulder_shield", active: false},
+            {id: 118, decision: "Wall_Left", card: "Stalling", name: "punch_hold", active: false},
+            {id: 119, decision: "Wall_Left", card: "Stalling", name: "inverted_r_hold", active: false}
         ]
     },
     {
         phase: 2,
         keys: [
-            {id: 4, decision: "first_contact", card: "cw_backpick", name: "invertedL_rake", x: 72.2, y: 6.9, width: 14.2, height: 2.1, el: null},
-            {id: 5, decision: "first_contact", card: "cw_backpick", name: "punch", x: 72.2, y: 9, width: 7, height: 2.1, el: null},
-            {id: 6, decision: "first_contact", card: "cw_backpick", name: "barrel_roll", x: 72.2, y: 11.1, width: 10, height: 2.1, el: null},
-            {id: 7, decision: "first_contact", card: "ccw_backpick", name: "rake", x: 72.2, y: 16.5, width: 5, height: 2, el: null},
-            {id: 8, decision: "first_contact", card: "ccw_backpick", name: "invertedr_punch", x: 72.2, y: 18.4, width: 16, height: 2.1, el: null},
-            {id: 9, decision: "first_contact", card: "ccw_backpick", name: "punch", x: 72.2, y: 20.4, width: 6.6, height: 2.2, el: null},
-            {id: 10, decision: "first_contact", card: "ccw_backpick", name: "rake_shovel", x: 72.2, y: 22.6, width: 14, height: 2.2, el: null},
-            {id: 11, decision: "first_contact", card: "smash", name: "punch_under", x: 72.2, y: 27.7, width: 16.5, height: 4, el: null},
-            {id: 12, decision: "first_contact", card: "smash", name: "punch_roll", x: 72.2, y: 31.6, width: 14.8, height: 4.2, el: null},
-            {id: 13, decision: "first_contact", card: "smash", name: "invertedr_punch_hotpotatoe", x: 72.2, y: 35.9, width: 19, height: 4.1, el: null},
-            {id: 14, decision: "first_contact", card: "smash", name: "invertedr_punch_roll", x: 72.2, y: 40, width: 16.5, height: 4.3, el: null},
-            {id: 15, decision: "first_contact", card: "ccw_tackle", name: "rake_curl", x: 72.2, y: 47.4, width: 10, height: 2.2, el: null},
-            {id: 16, decision: "first_contact", card: "ccw_tackle", name: "invertedr_curl", x: 72.2, y: 51.6, width: 14.5, height: 2.0, el: null},
-            {id: 17, decision: "first_contact", card: "cw_tackle", name: "pinch_curl", x: 72.2, y: 56.7, width: 10.4, height: 2.0, el: null},
-            {id: 18, decision: "first_contact", card: "cw_tackle", name: "barrel_roll", x: 72.2, y: 58.7, width: 10.4, height: 2.0, el: null},
-            {id: 49, decision: "first_contact", card: "ccw_tackle", name: "invertedL_rake", x: 72.2, y: 49.4, width: 15, height: 2.2, el: null},
-            {id: 50, decision: "first_contact", card: "void", name: "arm_punch", x: 72.2, y: 64, width: 21.5, height: 4, el: null},
-            {id: 51, decision: "first_contact", card: "void", name: "bottom_tap_decoy_pass", x: 72.2, y: 68, width: 23.7, height: 4.2, el: null},
-            {id: 52, decision: "first_contact", card: "void", name: "knock_down", x: 72.2, y: 72, width: 15, height: 4.3, el: null},
-            {id: 53, decision: "first_contact", card: "void", name: "flick_pass", x: 72.2, y: 76.2, width: 12, height: 2.2, el: null}
+            {id: 4, decision: "first_contact", card: "cw_backpick", name: "inverted_L_rake", active: true},
+            {id: 5, decision: "first_contact", card: "cw_backpick", name: "punch", active: true},
+            {id: 6, decision: "first_contact", card: "cw_backpick", name: "barrel_roll", active: true},
+            {id: 7, decision: "first_contact", card: "ccw_backpick", name: "rake", active: true},
+            {id: 8, decision: "first_contact", card: "ccw_backpick", name: "inverted_R_punch", active: true},
+            {id: 9, decision: "first_contact", card: "ccw_backpick", name: "punch", active: true},
+            {id: 10, decision: "first_contact", card: "ccw_backpick", name: "rake_shovel", active: true},
+            {id: 11, decision: "first_contact", card: "smash", name: "punch_under", active: true},
+            {id: 12, decision: "first_contact", card: "smash", name: "punch_roll", active: true},
+            {id: 13, decision: "first_contact", card: "smash", name: "invertedr_punch_hotpotatoe", active: true},
+            {id: 14, decision: "first_contact", card: "smash", name: "invertedr_punch_roll", active: true},
+            {id: 15, decision: "first_contact", card: "ccw_tackle", name: "rake_curl", active: true},
+            {id: 16, decision: "first_contact", card: "ccw_tackle", name: "invertedr_curl", active: true},
+            {id: 17, decision: "first_contact", card: "cw_tackle", name: "pinch_curl", active: true},
+            {id: 18, decision: "first_contact", card: "cw_tackle", name: "barrel_roll", active: true},
+            {id: 49, decision: "first_contact", card: "ccw_tackle", name: "inverted_L_rake", active: true},
+            {id: 50, decision: "first_contact", card: "void", name: "arm_punch", active: true},
+            {id: 51, decision: "first_contact", card: "void", name: "bottom_tap_decoy_pass", active: true},
+            {id: 52, decision: "first_contact", card: "void", name: "knock_down", active: true},
+            {id: 53, decision: "first_contact", card: "void", name: "flick_pass", active: true},
+            {id: 85, decision: "Deal_With_Threats", card: "protect_and_stall", name: "alternate_cw_ccw_curls", active: false},
+            {id: 86, decision: "Deal_With_Threats", card: "protect_and_stall", name: "continuous_curl", active: false},
+            {id: 87, decision: "Deal_With_Threats", card: "protect_and_stall", name: "backward_cobra", active: false},
+            {id: 88, decision: "Deal_With_Threats", card: "protect_and_stall", name: "enter_wall_game", active: false},
+            {id: 89, decision: "Deal_With_Threats", card: "protect_and_stall", name: "dump_pass", active: false},
         ]
     },
-    {
+    /** {
         phase: 3,
         keys: [     
             {id: 26, decision: "take_empty_space", card: "flick_into_space", name: "piano_keys", x: 17, y: 45.4, width: 12, height: 2.7, el: null}
         ]
-    },
+    },**/
     {
         phase: 4,
         keys: [
-            {id: 19, decision: "side_by_side", card: "cut_in_left", name: "layoff", x: 12.5, y: 61.5, width: 12.5, height: 2.2, el: null},
-            {id: 20, decision: "side_by_side", card: "cut_in_left", name: "dropoff", x: 12.4, y: 65.8, width: 12.5, height: 2, el: null},
-            {id: 21, decision: "side_by_side", card: "cut_in_right", name: "ccw_curl_and_slide", x: 10, y: 90.1, width: 15, height: 2, el: null},
-            {id: 22, decision: "side_by_side", card: "cut_in_right", name: "invertedr_dropoff", x: 12.4, y: 92.2, width: 12.5, height: 2.1, el: null},
-            {id: 23, decision: "side_by_side", card: "cut_in_right", name: "dropoff", x: 14.5, y: 94.4, width: 11, height: 2, el: null},
-            {id: 24, decision: "head_on", card: "left_option", name: "crossfrog_pass", x: 27.6, y: 9.7, width: 14.7, height: 2, el: null},
-            {id: 25, decision: "head_on", card: "right_option", name: "crossfrog_pass", x: 54.5, y: 7.7, width: 14.7, height: 2, el: null},
-            {id: 36, decision: "head_on", card: "left_option", name: "dummy", x: 27.6, y: 1.3, width: 5.2, height: 2, el: null},
-            {id: 37, decision: "head_on", card: "left_option", name: "flick_and_chase", x: 27.6, y: 3.3, width: 16, height: 2.1, el: null},
-            {id: 38, decision: "head_on", card: "right_option", name: "fade", x: 54.5, y: 1.3, width: 5.2, height: 2, el: null},
-            {id: 39, decision: "head_on", card: "right_option", name: "flick_and_chase", x: 54.5, y: 3.3, width: 16, height: 2, el: null},
-            {id: 40, decision: "side_by_side", card: "cut_in_left", name: "CW_270_curl", x: 9.5, y: 55.3, width: 15.2, height: 2.2, el: null},
-            {id: 41, decision: "side_by_side", card: "cut_in_left", name: "windmill", x: 9.8, y: 59.5, width: 15, height: 2.1, el: null},
-            {id: 42, decision: "side_by_side", card: "cut_in_right", name: "knuckleR_V", x: 8.6, y: 83.6, width: 16.5, height: 2, el: null},
-            {id: 43, decision: "side_by_side", card: "cut_in_right", name: "CCW_270_curl", x: 9.7, y: 77.4, width: 15, height: 2, el: null},
-            {id: 44, decision: "side_by_side", card: "cut_in_left", name: "Shovel_V", x: 8.7, y: 57.5, width: 16, height: 2.1, el: null},
-            {id: 45, decision: "side_by_side", card: "cut_in_right", name: "Six", x: 8.7, y: 75.4, width: 16, height: 2, el: null},
-            {id: 46, decision: "side_by_side", card: "cut_in_right", name: "Fake_CCW_invertedR_curl_V", x: 8.7, y: 79.4, width: 16, height: 2, el: null},
-            {id: 47, decision: "side_by_side", card: "cut_in_right", name: "CCW_360_invertedR_curl", x: 9.8, y: 81.4, width: 15, height: 2.2, el: null},
-            {id: 48, decision: "head_on", card: "left_option", name: "Shovel_V", x: 27.6, y: 5.3, width: 7, height: 2.2, el: null},
-            {id: 54, decision: "side_by_side", card: "cut_in_left", name: "Shovel_Pass", x: 10, y: 63.7, width: 15, height: 2.2, el: null},
-            {id: 62, decision: "head_on", card: "right_option", name: "Leapfrog_Pass", x: 54.5, y: 5.45, width: 14.7, height: 2.2, el: null},
-            {id: 63, decision: "head_on", card: "left_option", name: "Leapfrog_Pass", x: 27.7, y: 7.5, width: 14.7, height: 2.2, el: null},
-            {id: 64, decision: "head_on", card: "left_option", name: "Shovel_Pass", x: 27.7, y: 11.5, width: 17, height: 2.2, el: null},
-            {id: 65, decision: "head_on", card: "right_option", name: "Flick_Pass", x: 54.5, y: 9.6, width: 17, height: 2.2, el: null},
-            {id: 66, decision: "head_on", card: "right_option", name: "Flick_Pass_Forward", x: 54.5, y: 11.5, width: 17, height: 2.2, el: null},
-            {id: 67, decision: "head_on", card: "left_option", name: "Flick_Pass_Forward", x: 27.7, y: 13.5, width: 17, height: 2.2, el: null},
-            {id: 68, decision: "side_by_side", card: "cut_in_right", name: "Inverted_R_Layoff", x: 12.5, y: 88, width: 12.5, height: 2.2, el: null},
-            {id: 70, decision: "side_by_side", card: "cut_in_right", name: "Reverse Windmill", x: 9.5, y: 85.7, width: 15.5, height: 2.2, el: null},
-            {id: 71, decision: "side_by_side", card: "cut_in_right", name: "Standard_V", x: 9.5, y: 73.3, width: 15.5, height: 2.2, el: null},
-            {id: 72, decision: "behind_under", card: "right_option", name: "CCW_curl", x: 69, y: 68.5, width: 14.5, height: 2.2, el: null},
-            {id: 73, decision: "behind_under", card: "left_option", name: "CW_curl", x: 68.5, y: 53.5, width: 14.5, height: 2.2, el: null},
-            {id: 74, decision: "behind_under", card: "left_option", name: "Shovel_V", x: 68.5, y: 55.7, width: 14.5, height: 2.2, el: null},
-            {id: 75, decision: "behind_under", card: "left_option", name: "Windmill", x: 68.5, y: 57.9, width: 14.5, height: 2.2, el: null},
-            {id: 76, decision: "behind_under", card: "right_option", name: "Standard_V", x: 68.6, y: 64.1, width: 14.5, height: 2.2, el: null}
+            {id: 19, decision: "side_by_side", card: "cut_in_left", name: "layoff", active: true},
+            {id: 20, decision: "side_by_side", card: "cut_in_left", name: "dropoff", active: true},
+            {id: 21, decision: "side_by_side", card: "cut_in_right", name: "ccw_curl_and_slide", active: true},
+            {id: 22, decision: "side_by_side", card: "cut_in_right", name: "invertedr_dropoff", active: true},
+            {id: 23, decision: "side_by_side", card: "cut_in_right", name: "dropoff", active: true},
+            {id: 24, decision: "head_on", card: "left_option", name: "crossfrog_pass", active: true},
+            {id: 25, decision: "head_on", card: "right_option", name: "crossfrog_pass", active: true},
+            {id: 36, decision: "head_on", card: "left_option", name: "dummy", active: true},
+            {id: 37, decision: "head_on", card: "left_option", name: "flick_and_chase", active: true},
+            {id: 38, decision: "head_on", card: "right_option", name: "fade", active: true},
+            {id: 39, decision: "head_on", card: "right_option", name: "flick_and_chase", active: true},
+            {id: 40, decision: "side_by_side", card: "cut_in_left", name: "CW_270_curl", active: true},
+            {id: 41, decision: "side_by_side", card: "cut_in_left", name: "windmill", active: true},
+            {id: 42, decision: "side_by_side", card: "cut_in_right", name: "knuckleR_V", active: true},
+            {id: 43, decision: "side_by_side", card: "cut_in_right", name: "CCW_270_curl", active: true},
+            {id: 44, decision: "side_by_side", card: "cut_in_left", name: "Shovel_V", active: true},
+            {id: 45, decision: "side_by_side", card: "cut_in_right", name: "Six", active: true},
+            {id: 46, decision: "side_by_side", card: "cut_in_right", name: "Fake_CCW_invertedR_curl_V", active: true},
+            {id: 47, decision: "side_by_side", card: "cut_in_right", name: "CCW_360_invertedR_curl", active: true},
+            {id: 48, decision: "head_on", card: "left_option", name: "Shovel_V", active: true},
+            {id: 54, decision: "side_by_side", card: "cut_in_left", name: "Shovel_Pass", active: true},
+            {id: 62, decision: "head_on", card: "right_option", name: "Leapfrog_Pass", active: true},
+            {id: 63, decision: "head_on", card: "left_option", name: "Leapfrog_Pass", active: true},
+            {id: 64, decision: "head_on", card: "left_option", name: "Shovel_Pass", active: true},
+            {id: 65, decision: "head_on", card: "right_option", name: "Flick_Pass", active: true},
+            {id: 66, decision: "head_on", card: "right_option", name: "Flick_Pass_Forward", active: true},
+            {id: 67, decision: "head_on", card: "left_option", name: "Flick_Pass_Forward", active: true},
+            {id: 68, decision: "side_by_side", card: "cut_in_right", name: "Inverted_R_Layoff", active: true},
+            {id: 70, decision: "side_by_side", card: "cut_in_right", name: "Reverse Windmill", active: true},
+            {id: 71, decision: "side_by_side", card: "cut_in_right", name: "Standard_V", active: true},
+            {id: 72, decision: "behind_under", card: "right_option", name: "CCW_curl", active: true},
+            {id: 73, decision: "behind_under", card: "left_option", name: "CW_curl", active: true},
+            {id: 74, decision: "behind_under", card: "left_option", name: "Shovel_V", active: true},
+            {id: 75, decision: "behind_under", card: "left_option", name: "Windmill", active: true},
+            {id: 76, decision: "behind_under", card: "right_option", name: "Standard_V", active: true},
+            {id: 90, decision: "side_by_side", card: "outside_options", name: "outswim", active: false},
+            {id: 91, decision: "side_by_side", card: "outside_options", name: "pass_around_outside", active: false},
+            {id: 92, decision: "behind_under", card: "forward_options", name: "remora_swim", active: false},
+            {id: 93, decision: "behind_under", card: "forward_options", name: "flick_pass", active: false},
+            {id: 94, decision: "behind_under", card: "right_option", name: "six", active: false},
+            {id: 95, decision: "behind_under", card: "right_option", name: "knuckleV", active: false},
+            {id: 96, decision: "behind_under", card: "right_option", name: "reverse_windmill", active: false},
+            {id: 97, decision: "behind_under", card: "right_option", name: "Fake_CCW_invertedR_curl_V", active: false},
+            {id: 98, decision: "behind_under", card: "right_option", name: "CCW_360_invertedR_curl", active: false}
         ]
     },
     {
         phase: 5,
         keys: [
-            {id: 27, decision: "get_down", card: "dives", name: "s_dive", x:55.5, y:13, width: 16, height: 3.7, el: null},
-            {id: 28, decision: "get_down", card: "dives", name: "duck_dive", x:55.5, y:17, width: 16, height: 3.7, el: null},
-            {id: 29, decision: "choose_body_position", card: "behind_puck", name: "cobra", x:19, y:29.5, width: 16, height: 3.7, el: null},
-            {id: 30, decision: "choose_body_position", card: "behind_puck", name: "icicle", x:19, y:33.8, width: 16, height: 3.7, el: null},
-            {id: 31, decision: "choose_body_position", card: "behind_puck", name: "upside_down", x:19, y:38, width: 16, height: 3.7, el: null},
-            {id: 32, decision: "choose_body_position", card: "ahead_of_puck", name: "backward_cobra", x:19, y:50.5, width: 16, height: 3.7, el: null},
-            {id: 33, decision: "choose_body_position", card: "ahead_of_puck", name: "retrospective_cobra", x:19, y:54.5, width: 16, height: 3.7, el: null},
-            {id: 34, decision: "choose_body_position", card: "ahead_of_puck", name: "turkish_fence", x:19, y:59, width: 16, height: 3.7, el: null},
-            {id: 35, decision: "choose_body_position", card: "ahead_of_puck", name: "turtle", x:19, y:63, width: 16, height: 3.7, el: null},
-            {id: 69, decision: "choose_body_position", card: "behind_puck", name: "fin_first", x:19, y:41.5, width: 16, height: 3.7, el: null}
+            {
+                id: 27,
+                decision: "get_down",
+                card: "dives",
+                name: "s_dive",
+                active: true
+            },
+            {
+                id: 28,
+                decision: "get_down",
+                card: "dives",
+                name: "duck_dive",
+                active: true
+            },
+            {
+                id: 29,
+                decision: "choose_body_position",
+                card: "behind_puck",
+                name: "cobra",
+                active: true
+            },
+            {
+                id: 30,
+                decision: "choose_body_position",
+                card: "behind_puck",
+                name: "icicle",
+                active: true
+            },
+            {
+                id: 31,
+                decision: "choose_body_position",
+                card: "behind_puck",
+                name: "upside_down",
+                active: true
+            },
+            {
+                id: 32,
+                decision: "choose_body_position",
+                card: "ahead_of_puck",
+                name: "backward_cobra",
+                active: true
+            },
+            {
+                id: 33,
+                decision: "choose_body_position",
+                card: "ahead_of_puck",
+                name: "retrospective_cobra",
+                active: true
+            },
+            {
+                id: 34,
+                decision: "choose_body_position",
+                card: "ahead_of_puck",
+                name: "turkish_fence",
+                active: true
+            },
+            {
+                id: 35,
+                decision: "choose_body_position",
+                card: "ahead_of_puck",
+                name: "turtle",
+                active: true
+            },
+            {
+                id: 69,
+                decision: "choose_body_position",
+                card: "behind_puck",
+                name: "fin_first",
+                active: true
+            },
+            {
+                id: 77,
+                decision: "Threat_Awareness",
+                card: "scout_opposing_players",
+                name: "lead_direction_changes_with_eyes",
+                active: false
+            },
+            {
+                id: 78,
+                decision: "Threat_Awareness",
+                card: "scout_opposing_players",
+                name: "check_opposition_during_dive",
+                active: false
+            },
+            {
+                id: 79,
+                decision: "Threat_Awareness",
+                card: "scout_opposing_players",
+                name: "check_above_with_exaggarated_dolphin_kick",
+                active: false
+            },
+            {
+                id: 80,
+                decision: "Threat_Awareness",
+                card: "visualize_opposition",
+                name: "positions",
+                active: false
+            },
+            {
+                id: 81,
+                decision: "Threat_Awareness",
+                card: "visualize_opposition",
+                name: "body_orientation",
+                active: false
+            },
+            {
+                id: 82,
+                decision: "Threat_Awareness",
+                card: "visualize_opposition",
+                name: "substitutions",
+                active: false
+            },
+            {
+                id: 83,
+                decision: "Threat_Awareness",
+                card: "visualize_opposition",
+                name: "breath_hold",
+                active: false
+            },
+            {
+                id: 84,
+                decision: "Threat_Awareness",
+                card: "visualize_opposition",
+                name: "hand_position",
+                active: false
+            }
         ]
     },
     {
         phase: 6,
         keys: [
-            {id: 55, decision: "right_wall", card: "leaving", name: "windmill_180_kickoff", x: 69, y: 80, width:20, height: 7, el: null},
-            {id: 56, decision: "right_wall", card: "leaving", name: "windmill", x: 69, y: 72, width:10, height: 7, el: null},
-            {id: 57, decision: "right_wall", card: "leaving", name: "InvertedR_rakeroll_shovel_V", x: 69, y: 24, width:28, height: 7, el: null},
-            {id: 61, decision: "right_wall", card: "leaving", name: "CW_Pinch_Curl_Kickoff", x: 69, y: 40, width:32, height: 7, el: null}
+            {id: 55, decision: "Wall_Right", card: "Leaving", name: "windmill_180_kickoff", active: true},
+            {id: 56, decision: "Wall_Right", card: "Leaving", name: "windmill", active: true},
+            {id: 57, decision: "Wall_Right", card: "Leaving", name: "InvertedR_rakeroll_shovel_V", active: true},
+            {id: 61, decision: "Wall_Right", card: "Leaving", name: "CW_Pinch_Curl_Kickoff", active: true},
+            {id: 99, decision: "Wall_Right", card: "Advancing", name: "inverted_r_hotpotatoe", active: false},
+            {id: 100, decision: "Wall_Right", card: "Advancing", name: "rake_spike", active: false},
+            {id: 101, decision: "Wall_Right", card: "Advancing", name: "vertical_rake_spike_hotpotatoe", active: false},
+            {id: 102, decision: "Wall_Right", card: "Advancing", name: "rake", active: false},
+            {id: 103, decision: "Wall_Right", card: "Stalling", name: "punch_hold", active: false},
+            {id: 104, decision: "Wall_Right", card: "Stalling", name: "inverted_r_hold", active: false},
+            {id: 105, decision: "Wall_Right", card: "Stalling", name: "shoulder_shield", active: false},
+            {id: 107, decision: "Wall_Right", card: "Leaving", name: "Shovel_Pass", active: false},
+            {id: 109, decision: "Wall_Right", card: "Leaving", name: "backflick", active: false},
+            {id: 110, decision: "Wall_Right", card: "Leaving", name: "cw_pinch_tackle", active: false},
+            {id: 111, decision: "Wall_Right", card: "Leaving", name: "barrel_roll", active: false}
         ]
     }
 ];
@@ -167,7 +463,7 @@ PhaseInfo.Phase_Key_Values = [
     {phase_key: 38, value: "Fade.gif"},
     {phase_key: 39, value: "FlickChaseRight.gif"},
     {phase_key: 40, value: "360CWCurl.gif"},
-    {phase_key: 41, value: "windmill.gif"},
+    //{phase_key: 41, value: "windmill.gif"},
     {phase_key: 41, value: "windmill_head_down_varient.gif"},
     {phase_key: 42, value: "knuckleV.gif"},
     {phase_key: 43, value: "360CCWCurl.gif"},
