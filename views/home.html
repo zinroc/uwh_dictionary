@@ -36,7 +36,7 @@
                         {{titleCase(display(value))}}
                     </div>
                     <div class="phase-chart-container">
-                        <div ng-repeat="puck in selectedPhasePucks" style="left: {{puck.pin.x}}px; top: {{puck.pin.y}}px;" class="puck">
+                        <div ng-repeat="puck in selectedPhasePucks" style="left: {{puck.pin.x}}px; top: {{puck.pin.y}}px;" class="puck {{puck.click && 'clickable'}}" ng-click="puck.click ? selectPhaseByName(puck.click) : null">
                             <div class="puck-title">
                                 {{titleCase(puck.name)}}
                             </div>

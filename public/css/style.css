@@ -19,6 +19,8 @@
     color: grey;
 }
 
+
+
 .skillButton-active:hover {
     background-color: pink;
 }
@@ -120,6 +122,14 @@
 
 .super-phase-button:hover {
     background-color: pink;
+}
+.clickable {
+    cursor: pointer;
+}
+
+
+.clickable:hover {
+    background-color: grey;
 }
 
 .puck {
