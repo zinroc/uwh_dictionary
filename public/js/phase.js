@@ -426,8 +426,8 @@ PhaseInfo.Phase_Keys = [
             {id: 105, decision: "Wall_Right", card: "Stalling", name: "shoulder_shield", active: false},
             {id: 107, decision: "Wall_Right", card: "Leaving", name: "Shovel_Pass", active: false},
             {id: 109, decision: "Wall_Right", card: "Leaving", name: "backflick", active: true},
-            {id: 110, decision: "Wall_Right", card: "Leaving", name: "cw_pinch_tackle", active: false},
-            {id: 111, decision: "Wall_Right", card: "Leaving", name: "barrel_roll", active: false}
+            {id: 110, decision: "Wall_Right", card: "Leaving", name: "cw_pinch_tackle", active: true},
+            {id: 111, decision: "Wall_Right", card: "Leaving", name: "barrel_roll", active: true}
         ]
     }
 ];
@@ -451,6 +451,8 @@ PhaseInfo.Phase_Key_Values = [
     {phase_key: 16, value: "InvertedRTackle.gif"},
     {phase_key: 16, value: "InvertedRTackleFromParallel.gif"},
     {phase_key: 17, value: "PinchCurl.gif"},
+    {phase_key: 110, value: "PinchCurl.gif"},,
+    {phase_key: 111, value: "BarrelRollCWTackle.gif"},
     {phase_key: 18, value: "BarrelRollCWTackle.gif"},
     {phase_key: 19, value: "Layoff.gif"},
     {phase_key: 19, value: "CWLayoff2.gif"},
