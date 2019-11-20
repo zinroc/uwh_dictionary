@@ -154,7 +154,6 @@ app.controller("HomeCtrl", function homeCtrl ($scope, $timeout) {
     }
 
     $scope.selectPhaseKey = function (key, isSearch = true) {
-        console.log("HERE")
         $scope.selectedPhaseKey = key;
         if (isSearch && !init) {
             $scope.$apply();
@@ -375,7 +374,6 @@ app.controller("HomeCtrl", function homeCtrl ($scope, $timeout) {
     $scope.selectKeyBySearchTerm = function(term) {
         var json = JSON.parse(term);
         autoSelectPhaseKeyId = json.key;
-        console.log(autoSelectPhaseKeyId, "<---")
         $scope.selectPhaseById(json.phase);
     }
     $scope.superPhaseButtons = [];
