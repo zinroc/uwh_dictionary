@@ -58,7 +58,7 @@
 
                             <div ng-repeat="key in selectedPhaseKeys"
                                 ng-if="key.card === card.title && key.decision === card.decision"
-                                ng-click="key.active ? selectPhaseKey(key, true) : null"
+                                ng-click="key.active ? selectPhaseKey(key, false) : null"
                                 class="skillButton-{{key.active ? 'active' : 'inactive'}} {{selectedPhaseKey.id === key.id ? 'selected' : 'unselected'}} " 
                             >
                                 {{titleCase(key.name)}}

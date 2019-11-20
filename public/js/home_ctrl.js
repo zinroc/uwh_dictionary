@@ -25,7 +25,7 @@ var Phase_Keys = [];
 
 var Super_Phase_Buttons = [];
 
-app.controller("HomeCtrl", function homeCtrl ($scope) {
+app.controller("HomeCtrl", function homeCtrl ($scope, $timeout) {
     "use strict";
 
     $scope.root = "https://uwhdictionary.herokuapp.com";
@@ -153,8 +153,12 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
       return str.join(' ');
     }
 
-    $scope.selectPhaseKey = function (key, newVersion = false) {
+    $scope.selectPhaseKey = function (key, isSearch = true) {
+        console.log("HERE")
         $scope.selectedPhaseKey = key;
+        if (isSearch && !init) {
+            $scope.$apply();
+        }
         $scope.setPhaseKeyValues();
         //if (!init){
             //if (!newVersion) {
@@ -162,6 +166,7 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
             //}
         //}
         $("#phaseKeyValueModal").modal();
+        $timeout($("#phaseKeyValueModal").focus(), 1000);
     };
 
     $scope.selectPhaseKeyById = function (id) {
@@ -370,6 +375,7 @@ app.controller("HomeCtrl", function homeCtrl ($scope) {
     $scope.selectKeyBySearchTerm = function(term) {
         var json = JSON.parse(term);
         autoSelectPhaseKeyId = json.key;
+        console.log(autoSelectPhaseKeyId, "<---")
         $scope.selectPhaseById(json.phase);
     }
     $scope.superPhaseButtons = [];
